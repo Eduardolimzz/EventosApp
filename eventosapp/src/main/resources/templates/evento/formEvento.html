@@ -1,24 +1,73 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>EventosApp</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<html xmlns:th="http:///thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-	<head>
-		<title>EventosApp</title>
-		</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 <body>
-	<h1>Cadastro de Eventos:</h1>
-	<form method="post">
-		Nome: <input type="text" value="" name="nome"/>
-		Local: <input type="text" value="" name="local"/>
-		Data: <input type="date" value="" name="data"/>
-		Horario: <input type="text" value="" name="horario"/>
-		
-		<button type="submit">Salvar</button>
-		
-		</form>
-	
-	
-	</body>
-
-	  
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2">
+                <h1 class="center-align">Cadastro de Eventos</h1>
+                
+                <div class="section">
+                    <a href="/eventos" class="waves-effect waves-light btn blue">
+                        <i class="material-icons left">format_list_bulleted</i>Lista de Eventos
+                    </a>
+                </div>
+                
+                <div class="section">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Novo Evento</span>
+                            
+                            <form method="post">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="nome" type="text" name="nome" class="validate" required>
+                                        <label for="nome">Nome do Evento</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="local" type="text" name="local" class="validate" required>
+                                        <label for="local">Local</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="input-field col s12 m6">
+                                        <input id="data" type="date" name="data" class="validate" required>
+                                        <label for="data">Data</label>
+                                    </div>
+                                    
+                                    <div class="input-field col s12 m6">
+                                        <input id="horario" type="time" name="horario" class="validate" required>
+                                        <label for="horario">Horário</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col s12 center-align">
+                                        <button class="btn waves-effect waves-light green" type="submit">
+                                            <i class="material-icons left">save</i>Salvar Evento
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+</body>
 </html>
