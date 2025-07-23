@@ -33,7 +33,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="evento : ${eventos}">
-                                <td><span th:text="${evento.nome}"></span></td>
+                                <td><a th:href="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}" th:text="${evento.nome}"></a></td>
                                 <td><span th:text="${evento.local}"></span></td>
                                 <td><span th:text="${evento.data}"></span></td>
                                 <td><span th:text="${evento.horario}"></span></td>
