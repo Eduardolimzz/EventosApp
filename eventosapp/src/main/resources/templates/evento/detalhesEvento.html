@@ -31,12 +31,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <p><strong>Horário:</strong> <span th:text="${evento.horario}"></span></p>
 </div>
 </div>
-<form method ="post">
+<form method="post" th:action="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}">
 	Nome: <input type="text" value="" name="nomeConvidado"/>
 	Rg: <input type="text" value="" name="rg"/>
-	<a href="/eventos" class="waves-effect waves-light btn blue">
+	<button type="submit" class="waves-effect waves-light btn blue">
 	<i class="material-icons left">add_circle_outline</i>Adicionar
-	</a>
+	</button>
 </form>
 </div>
 
