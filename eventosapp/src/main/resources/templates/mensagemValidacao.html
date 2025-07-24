@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div class="card-panel green lighten-1" role="alert" 
+     th:if="${not #strings.isEmpty(mensagemSucesso)}">
+    <span class="white-text" th:text="${mensagemSucesso}"></span>
+</div>
+
+<div class="card-panel red lighten-1" role="alert" 
+     th:if="${not #strings.isEmpty(mensagemErro)}">
+    <span class="white-text" th:text="${mensagemErro}"></span>
+</div>
+
+<div class="card-panel blue lighten-1" role="alert" 
+     th:if="${not #strings.isEmpty(mensagem) and #strings.isEmpty(mensagemSucesso) and #strings.isEmpty(mensagemErro)}">
+    <span class="white-text" th:text="${mensagem}"></span>
+</div>
+</body>
+</html>
