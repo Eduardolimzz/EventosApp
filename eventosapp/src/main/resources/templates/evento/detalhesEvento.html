@@ -1,85 +1,92 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>EventosApp</title>
+    <title>EventosApp</title>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div class="container">
-<div class="row">
-<div class="col s12">
-<h1 class="center-align">Detalhes do Evento</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h1 class="center-align">Detalhes do Evento</h1>
 
-<div class="section">
-<a href="/eventos" class="waves-effect waves-light btn blue">
-<i class="material-icons left">arrow_back</i>Voltar para Lista
-</a>
-</div>
+                <div class="section">
+                    <a href="/eventos" class="waves-effect waves-light btn blue">
+                        <i class="material-icons left">arrow_back</i>Voltar para Lista
+                    </a>
+                </div>
 
-<div class="section">
-<div class="card">
-<div class="card-content">
-<span class="card-title" th:text="${evento.nome}">Nome do Evento</span>
-<p><strong>Nome:</strong> <span th:text="${evento.nome}"></span></p>
-<p><strong>Local:</strong> <span th:text="${evento.local}"></span></p>
-<p><strong>Data:</strong> <span th:text="${evento.data}"></span></p>
-<p><strong>Horário:</strong> <span th:text="${evento.horario}"></span></p>
-</div>
-</div>
+                <div class="section">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title" th:text="${evento.nome}">Nome do Evento Placeholder</span>
+                            <p><strong>Nome:</strong> <span th:text="${evento.nome}"></span></p>
+                            <p><strong>Local:</strong> <span th:text="${evento.local}"></span></p>
+                            <p><strong>Data:</strong> <span th:text="${evento.data}"></span></p>
+                            <p><strong>Horário:</strong> <span th:text="${evento.horario}"></span></p>
+                        </div>
+                    </div>
 
-<th:block th:include="mensagemValidacao"></th:block>
+                    <th:block th:include="mensagemValidacao"></th:block>
 
-<div class="card-panel">
-<h5>Adicionar Convidado</h5>
-<form method="post" th:action="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}">
-<div class="row">
-<div class="input-field col s6">
-<input type="text" id="nomeConvidado" name="nomeConvidado" required>
-<label for="nomeConvidado">Nome do Convidado</label>
-</div>
-<div class="input-field col s6">
-<input type="text" id="rg" name="rg" required>
-<label for="rg">RG</label>
-</div>
-</div>
-<button type="submit" class="waves-effect waves-light btn blue">
-<i class="material-icons left">add_circle_outline</i>ADICIONAR
-</button>
-</form>
-</div>
-</div>
+                    <div class="card-panel">
+                        <h5>Adicionar Convidado</h5>
 
-<h5>Lista Convidados</h5>
-<div class="collection" th:if="${not #lists.isEmpty(convidados)}">
-<div class="collection-item" th:each="convidado : ${convidados}">
-<div class="row" style="margin-bottom: 0;">
-<div class="col s6">
-<strong>Nome do Convidado:</strong> <span th:text="${convidado.nomeConvidado}"></span>
-</div>
-<div class="col s6">
-<strong>RG:</strong> <span th:text="${convidado.rg}"></span>
-</div>
-</div>
-</div>
-</div>
+                        <form method="post" th:action="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input type="text" id="nomeConvidado" name="nomeConvidado" required>
+                                    <label for="nomeConvidado">Nome do Convidado</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input type="text" id="rg" name="rg" required>
+                                    <label for="rg">RG</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="waves-effect waves-light btn blue">
+                                <i class="material-icons left">add_circle_outline</i>ADICIONAR
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <h5>Lista Convidados</h5>
+				<div class="collection" th:if="${not #lists.isEmpty(convidados)}">
+				    <div class="collection-item" th:each="convidado : ${convidados}">
+				        <div class="row" style="margin-bottom: 0;">
+				            <div class="col s5">
+				                <strong>Nome do Convidado:</strong> <span th:text="${convidado.nomeConvidado}"></span>
+				            </div>
+				            <div class="col s5">
+				                <strong>RG:</strong> <span th:text="${convidado.rg}"></span>
+				            </div>
+				            <div class="col s2 right-align">
+								<a th:href="@{'/deletarConvidado/' + ${convidado.rg}}" 
+				                   class="btn red lighten-1 waves-effect waves-light">
+				                    <i class="material-icons">delete</i>
+				                </a>
+				            </div>
+				        </div>
+				    </div>
+				</div>
 
-<div class="card-panel grey lighten-4" th:if="${#lists.isEmpty(convidados)}">
-<p class="center-align">Nenhum convidado cadastrado ainda.</p>
-</div>
+                <div class="card-panel grey lighten-4" th:if="${#lists.isEmpty(convidados)}">
+                    <p class="center-align">Nenhum convidado cadastrado ainda.</p>
+                </div>
 
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-M.updateTextFields();
-});
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.updateTextFields();
+        });
+    </script>
 </body>
 </html>

@@ -8,6 +8,21 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	<style>
+	        .btn.red {
+	            width: 35px; 
+	            padding-left: 0;
+	            padding-right: 0;
+	            display: flex; 
+	            justify-content: center; 
+	            align-items: center; 
+	        }
+
+	        .btn.red i.material-icons {
+	            margin: 0; 
+	        }
+	    </style>
 </head>
 <body>
     <div class="container">
@@ -29,6 +44,7 @@
                                 <th>Local</th>
                                 <th>Data</th>
                                 <th>Horário</th>
+								<th>Deletar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +53,10 @@
                                 <td><span th:text="${evento.local}"></span></td>
                                 <td><span th:text="${evento.data}"></span></td>
                                 <td><span th:text="${evento.horario}"></span></td>
+								<td>								<a class="waves-effect waves-light btn red" th:href="@{/deletarEvento/{codigo}(codigo=${evento.codigo})}">
+								    <i class="material-icons left">delete</i>
+								</a>
+								</td>
                             </tr>
                         </tbody>
                     </table>

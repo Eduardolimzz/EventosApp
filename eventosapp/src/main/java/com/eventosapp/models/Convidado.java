@@ -18,7 +18,6 @@ public class Convidado {
     @ManyToOne
     private Evento evento;
 
-    // Getters e Setters
     public String getRg() {
         return rg;
     }
