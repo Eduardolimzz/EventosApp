@@ -1,70 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>EventosApp</title>
-
+    <title>Bem-vindo ao EventosApp</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
-	<style>
-	        .btn.red {
-	            width: 35px; 
-	            padding-left: 0;
-	            padding-right: 0;
-	            display: flex; 
-	            justify-content: center; 
-	            align-items: center; 
-	        }
-
-	        .btn.red i.material-icons {
-	            margin: 0; 
-	        }
-	    </style>
+    <style>
+        body { display: flex; min-height: 100vh; flex-direction: column; }
+        main { flex: 1 0 auto; }
+        .content-box {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+            border-radius: 2px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <h1 class="center-align">Lista de Eventos</h1>
-                
-                <div class="section">
-                    <a href="/cadastrarEvento" class="waves-effect waves-light btn blue">
-                        <i class="material-icons left">add_circle_outline</i>Cadastrar Evento
-                    </a>
-                </div>
-                
-                <div class="section">
-                    <table class="striped responsive-table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Local</th>
-                                <th>Data</th>
-                                <th>Horário</th>
-								<th>Deletar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="evento : ${eventos}">
-                                <td><a th:href="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}" th:text="${evento.nome}"></a></td>
-                                <td><span th:text="${evento.local}"></span></td>
-                                <td><span th:text="${evento.data}"></span></td>
-                                <td><span th:text="${evento.horario}"></span></td>
-								<td>								<a class="waves-effect waves-light btn red" th:href="@{/deletarEvento/{codigo}(codigo=${evento.codigo})}">
-								    <i class="material-icons left">delete</i>
-								</a>
-								</td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m8 offset-m2 content-box">
+                    <h1 class="center-align blue-text text-darken-2">Bem-vindo ao EventosApp!</h1>
+                    <p class="center-align flow-text">Gerencie seus eventos e convidados de forma simples.</p>
+                    <br>
+                    <div class="center-align">
+                        <a href="/cadastrarEvento" class="waves-effect waves-light btn-large green darken-1 margin-right">
+                            <i class="material-icons left">add_circle</i>Cadastrar Novo Evento
+                        </a>
+                        <a href="/eventos" class="waves-effect waves-light btn-large blue darken-1">
+                            <i class="material-icons left">list</i>Ver Lista de Eventos
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
