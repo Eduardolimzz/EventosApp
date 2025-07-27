@@ -133,6 +133,9 @@
             padding: 16px 15px;
             font-size: 14px;
         }
+		.events-table colgroup col:last-child { 
+		        min-width: 100px;
+		    }
 
         /* Links dos eventos */
         .event-link {
@@ -286,17 +289,39 @@
 
             .events-table thead th,
             .events-table tbody td {
-                padding: 12px 8px;
-                font-size: 12px;
+				padding: 15px 10px;
+		        font-size: 15px; 
+		        text-align: left;
             }
+			@media only screen and (max-width: 600px) {
+			        .events-table thead th,
+			        .events-table tbody td {
+			            padding: 10px 5px; /* Reduza o padding para telas menores */
+			            font-size: 11px;
+			        }
+			        .events-table thead th:last-child,
+			        .events-table tbody td:last-child {
+			            min-width: 80px; /* Ajuste para caber em telas menores */
+			        }
+			    }
 
             /* Ajuste para botões em telas pequenas */
-            .action-btn {
-                margin-right: 4px !important;
-                height: 30px !important;
-                width: 30px !important;
-                min-width: 30px !important;
-            }
+			.action-btn {
+			        /* Seu código existente. Mantenha os !important se eles forem necessários */
+			        border-radius: 6px;
+			        transition: all 0.3s ease;
+			        height: 36px !important;
+			        width: 36px !important;
+			        min-width: 36px !important;
+			        padding: 0 !important;
+			        display: inline-flex !important;
+			        align-items: center !important;
+			        justify-content: center !important;
+			        margin-right: 8px !important;
+			    }
+				.action-btn:last-child {
+				        margin-right: 0 !important;
+				    }
             .action-btn i {
                 font-size: 16px !important;
             }
