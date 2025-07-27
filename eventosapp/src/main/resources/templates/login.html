@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - EventosApp</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            color: #2196F3;
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+
+        .page-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .form-container {
+            margin-top: 30px;
+        }
+
+        .input-field {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-field label {
+            color: #b0b0b0 !important;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-field label.active {
+            color: #2196F3 !important;
+        }
+
+        .input-field input[type=email],
+        .input-field input[type=password] {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ffffff !important;
+            padding: 12px 16px !important;
+            font-size: 14px;
+            height: auto !important;
+            margin: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .input-field input[type=email]:focus,
+        .input-field input[type=password]:focus {
+            border-color: #2196F3 !important;
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2) !important;
+            background-color: #2a2a2a !important;
+        }
+
+        .input-field.error input {
+            border-color: #f44336 !important;
+        }
+
+        .btn-login {
+            background-color: #2196F3;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #1976D2;
+            transform: translateY(-1px);
+        }
+
+        .btn-login:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: #2196F3;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .forgot-password a:hover {
+            color: #64B5F6;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #333;
+        }
+
+        .divider span {
+            background-color: #1a1a1a;
+            color: #888;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link p {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            color: #64B5F6;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #b0b0b0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #2196F3;
+        }
+
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 1px solid #f44336;
+            border-radius: 6px;
+            color: #f44336;
+            padding: 12px 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            border-radius: 6px;
+            color: #4CAF50;
+            padding: 12px 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message {
+            background-color: rgba(33, 150, 243, 0.1);
+            border: 1px solid #2196F3;
+            border-radius: 6px;
+            color: #2196F3;
+            padding: 12px 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .field-error {
+            color: #f44336;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+
+            .back-link {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">
+        <i class="material-icons">arrow_back</i>
+        Voltar para início
+    </a>
+
+    <div class="login-container">
+        <div class="logo-section">
+            <a href="/" class="logo">
+                <i class="material-icons">event_available</i>
+                EventosApp
+            </a>
+            <h1 class="page-title">Entrar</h1>
+            <p class="page-subtitle">Acesse sua conta para gerenciar seus eventos</p>
+        </div>
+
+        <!-- Mensagem de sucesso (do cadastro ou outros) -->
+        <div th:if="${sucesso}" class="success-message" th:text="${sucesso}"></div>
+        
+        <!-- Mensagem de welcome para usuário que acabou de se cadastrar -->
+        <div th:if="${param.cadastro}" class="welcome-message">
+            Conta criada com sucesso! Faça login para continuar.
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div th:if="${erro}" class="error-message" th:text="${erro}"></div>
+
+        <div class="form-container">
+            <form id="loginForm" method="post" th:action="@{/login}">
+                <div class="input-field">
+                    <input type="email" id="email" name="email" th:value="${email}" required>
+                    <label for="email" th:class="${email} ? 'active'">E-mail</label>
+                    <span id="emailError" class="field-error" style="display: none;">E-mail é obrigatório</span>
+                </div>
+
+                <div class="input-field">
+                    <input type="password" id="senha" name="senha" required>
+                    <label for="senha">Senha</label>
+                    <span id="senhaError" class="field-error" style="display: none;">Senha é obrigatória</span>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="/recuperar-senha">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="btnLogin">
+                    Entrar
+                </button>
+            </form>
+        </div>
+
+        <div class="divider">
+            <span>ou</span>
+        </div>
+
+        <div class="signup-link">
+            <p>Não tem uma conta? <a href="/cadastro">Criar conta</a></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.updateTextFields();
+            
+            const form = document.getElementById('loginForm');
+            const btnLogin = document.getElementById('btnLogin');
+            const emailInput = document.getElementById('email');
+            const senhaInput = document.getElementById('senha');
+
+            // Validação em tempo real
+            emailInput.addEventListener('blur', validateEmail);
+            emailInput.addEventListener('input', clearFieldError);
+            
+            senhaInput.addEventListener('blur', validateSenha);
+            senhaInput.addEventListener('input', clearFieldError);
+
+            function validateEmail() {
+                const email = emailInput.value.trim();
+                const error = document.getElementById('emailError');
+                const inputField = emailInput.closest('.input-field');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!email) {
+                    error.textContent = 'E-mail é obrigatório';
+                    error.style.display = 'block';
+                    inputField.classList.add('error');
+                    return false;
+                } else if (!emailRegex.test(email)) {
+                    error.textContent = 'E-mail inválido';
+                    error.style.display = 'block';
+                    inputField.classList.add('error');
+                    return false;
+                } else {
+                    error.style.display = 'none';
+                    inputField.classList.remove('error');
+                    return true;
+                }
+            }
+
+            function validateSenha() {
+                const senha = senhaInput.value.trim();
+                const error = document.getElementById('senhaError');
+                const inputField = senhaInput.closest('.input-field');
+                
+                if (!senha) {
+                    error.textContent = 'Senha é obrigatória';
+                    error.style.display = 'block';
+                    inputField.classList.add('error');
+                    return false;
+                } else if (senha.length < 6) {
+                    error.textContent = 'Senha deve ter pelo menos 6 caracteres';
+                    error.style.display = 'block';
+                    inputField.classList.add('error');
+                    return false;
+                } else {
+                    error.style.display = 'none';
+                    inputField.classList.remove('error');
+                    return true;
+                }
+            }
+
+            function clearFieldError(e) {
+                const inputField = e.target.closest('.input-field');
+                const fieldError = inputField.querySelector('.field-error');
+                
+                if (e.target.value.trim()) {
+                    fieldError.style.display = 'none';
+                    inputField.classList.remove('error');
+                }
+            }
+
+            // Envio do formulário
+            form.addEventListener('submit', function(e) {
+                const emailValido = validateEmail();
+                const senhaValida = validateSenha();
+                
+                if (!emailValido || !senhaValida) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Adicionar indicador de loading
+                btnLogin.disabled = true;
+                btnLogin.textContent = 'Entrando...';
+                form.classList.add('loading');
+            });
+
+            // Auto-focus no campo de senha se email já estiver preenchido
+            if (emailInput.value.trim()) {
+                senhaInput.focus();
+            }
+
+            // Limpar mensagens de erro ao começar a digitar
+            const inputs = form.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    // Esconder mensagens de erro do servidor
+                    const serverErrors = document.querySelectorAll('.error-message');
+                    serverErrors.forEach(error => {
+                        if (error.style.display !== 'none') {
+                            error.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Se o usuário vier da página de cadastro, focar no email
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('cadastro') === 'sucesso') {
+                emailInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>

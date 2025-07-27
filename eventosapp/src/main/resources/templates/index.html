@@ -1,43 +1,848 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR">
 <head>
-    <title>Bem-vindo ao EventosApp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventosApp - Gestão Profissional de Eventos</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { display: flex; min-height: 100vh; flex-direction: column; }
-        main { flex: 1 0 auto; }
-        .content-box {
-            margin-top: 50px;
-            padding: 30px;
-            background-color: #fff;
-            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-            border-radius: 2px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            border-bottom: 1px solid #333;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #2196F3;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-login, .btn-register {
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-login {
+            color: #e0e0e0;
+            background-color: transparent;
+            border-color: #555;
+        }
+
+        .btn-login:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .btn-register {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background-color: #1976D2;
+        }
+
+        /* Hero Section */
+		.hero {
+		       background-color: #0f0f0f;
+		       padding: 120px 20px 80px;
+		       text-align: center;
+		       min-height: 100vh; /* Adicionado/Modificado */
+		       display: flex; /* Adicionado para centralizar o conteúdo verticalmente */
+		       align-items: center; /* Adicionado para centralizar o conteúdo verticalmente */
+		       justify-content: center; /* Adicionado para centralizar o conteúdo horizontalmente, se necessário */
+		   }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: #2196F3;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #e0e0e0;
+            padding: 15px 30px;
+            border: 1px solid #555;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #333;
+            border-color: #777;
+            color: #fff;
+        }
+
+        /* How it works Section */
+		.how-it-works {
+		        background-color: #1a1a1a;
+		        padding: 80px 20px;
+		        min-height: 100vh; /* Adicionado/Modificado */
+		        display: flex; /* Adicionado para centralizar o conteúdo verticalmente */
+		        align-items: center; /* Adicionado para centralizar o conteúdo verticalmente */
+		        justify-content: center; /* Adicionado */
+		        flex-direction: column; /* Para manter o conteúdo em coluna e centralizado */
+		    }
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 60px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .step-card {
+            background-color: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: #2196F3;
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            background-color: #2196F3;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-card h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .step-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+		.features {
+		        background-color: #0f0f0f;
+		        padding: 80px 20px;
+		        min-height: 100vh;  /* Para manter o conteúdo em coluna e centralizado */
+		    }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px 25px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #2196F3;
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            color: #2196F3;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Process Flow Section */
+        .process-flow {
+            background-color: #1a1a1a;
+            padding: 80px 20px;
+        }
+
+        .flow-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step:not(:last-child):after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2196F3;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .flow-icon {
+            background-color: #2196F3;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
+        }
+
+        .flow-step h4 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .flow-step p {
+            color: #b0b0b0;
+            font-size: 13px;
+        }
+
+        /* CTA Section */
+		.cta-section {
+		background-color: #0f0f0f;
+		padding: 120px 20px; 
+		text-align: center;
+		border-top: 1px solid #333;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column; 
+		justify-content: center; 
+		align-items: center; 
+		}
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .cta-content p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+            text-align: center;
+            color: #888;
+        }
+
+        /* Páginas de Login/Cadastro */
+        .auth-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0a0a0a;
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .form-container {
+            margin-top: 30px;
+        }
+
+        .input-field {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-field label {
+            color: #b0b0b0 !important;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-field label.active {
+            color: #2196F3 !important;
+        }
+
+        .input-field input[type=text],
+        .input-field input[type=email],
+        .input-field input[type=password] {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ffffff !important;
+            padding: 12px 16px !important;
+            font-size: 14px;
+            height: auto !important;
+            margin: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .input-field input[type=text]:focus,
+        .input-field input[type=email]:focus,
+        .input-field input[type=password]:focus {
+            border-color: #2196F3 !important;
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2) !important;
+            background-color: #2a2a2a !important;
+        }
+
+        .btn-auth {
+            background-color: #2196F3;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-auth:hover {
+            background-color: #1976D2;
+            transform: translateY(-1px);
+        }
+
+        .btn-auth:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #b0b0b0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            color: #2196F3;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #333;
+        }
+
+        .divider span {
+            background-color: #1a1a1a;
+            color: #888;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .auth-link p {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .auth-link a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .auth-link a:hover {
+            color: #64B5F6;
+        }
+
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 1px solid #f44336;
+            border-radius: 6px;
+            color: #f44336;
+            padding: 12px 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            border-radius: 6px;
+            color: #4CAF50;
+            padding: 12px 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: #2196F3;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .forgot-password a:hover {
+            color: #64B5F6;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-buttons {
+                gap: 10px;
+            }
+
+            .btn-login, .btn-register {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 280px;
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+            }
+
+            .flow-step:not(:last-child):after {
+                content: '↓';
+                right: auto;
+                bottom: -15px;
+                top: auto;
+                transform: none;
+            }
+
+            .auth-container {
+                padding: 30px 25px;
+            }
+
+            .back-link {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m8 offset-m2 content-box">
-                    <h1 class="center-align blue-text text-darken-2">Bem-vindo ao EventosApp!</h1>
-                    <p class="center-align flow-text">Gerencie seus eventos e convidados de forma simples.</p>
-                    <br>
-                    <div class="center-align">
-                        <a href="/cadastrarEvento" class="waves-effect waves-light btn-large green darken-1 margin-right">
-                            <i class="material-icons left">add_circle</i>Cadastrar Novo Evento
-                        </a>
-                        <a href="/eventos" class="waves-effect waves-light btn-large blue darken-1">
-                            <i class="material-icons left">list</i>Ver Lista de Eventos
-                        </a>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showHome()">
+                <i class="material-icons">event_available</i>
+                EventosApp
+            </a>
+            <div class="nav-buttons">
+                <a href="/login" class="btn-login">Entrar</a>
+                <a href="/cadastro" class="btn-register">Criar Conta</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Landing Page -->
+    <div id="homePage">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Gestão Profissional de Eventos</h1>
+                <p class="hero-subtitle">Plataforma completa para organizar eventos e gerenciar convidados com eficiência e controle total</p>
+                <div class="hero-buttons">
+                    <a href="/cadastro" class="btn-primary">
+                        <i class="material-icons">person_add</i>
+                        Criar Conta Grátis
+                    </a>
+                    <a href="/login" class="btn-secondary">
+                        <i class="material-icons">login</i>
+                        Fazer Login
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it Works Section -->
+        <section class="how-it-works">
+            <div class="section-container">
+                <h2 class="section-title">Como Funciona</h2>
+                <p class="section-subtitle">Sistema completo de gestão de eventos em 3 etapas simples</p>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Cadastre seu Evento</h3>
+                        <p>Crie eventos definindo nome, local, data e horário. Interface intuitiva e campos organizados para inserção rápida de informações.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Gerencie Convidados</h3>
+                        <p>Adicione convidados com nome e número de identificação. Edite informações diretamente na lista com funcionalidade inline.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Controle Total</h3>
+                        <p>Visualize todos os eventos em lista organizada, edite detalhes rapidamente e mantenha controle completo da organização.</p>
+                    </div>
+                </div>
+
+                <div class="flow-container">
+                    <div class="flow-steps">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="material-icons">add_circle</i>
+                            </div>
+                            <h4>Criar</h4>
+                            <p>Novo Evento</p>
+                        </div>
+
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="material-icons">people</i>
+                            </div>
+                            <h4>Adicionar</h4>
+                            <p>Convidados</p>
+                        </div>
+
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="material-icons">edit</i>
+                            </div>
+                            <h4>Editar</h4>
+                            <p>Informações</p>
+                        </div>
+
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="material-icons">dashboard</i>
+                            </div>
+                            <h4>Gerenciar</h4>
+                            <p>Lista Completa</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="section-container">
+                <h2 class="section-title">Funcionalidades</h2>
+                <p class="section-subtitle">Recursos profissionais para gestão eficiente</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="material-icons feature-icon">event_note</i>
+                        <h3>Cadastro de Eventos</h3>
+                        <p>Sistema completo para registrar eventos com todos os detalhes necessários: nome, local, data e horário.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="material-icons feature-icon">list</i>
+                        <h3>Lista de Eventos</h3>
+                        <p>Visualização organizada de todos os eventos cadastrados com acesso rápido aos detalhes e edição inline.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="material-icons feature-icon">people_outline</i>
+                        <h3>Gestão de Convidados</h3>
+                        <p>Adicione, edite e remova convidados com controle de identificação e contador automático de participantes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="material-icons feature-icon">edit</i>
+                        <h3>Edição Inline</h3>
+                        <p>Edite informações diretamente nas listas sem sair da página. Validação em tempo real e salvamento automático.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="material-icons feature-icon">devices</i>
+                        <h3>Interface Responsiva</h3>
+                        <p>Design adaptável para todos os dispositivos com experiência otimizada para desktop, tablet e mobile.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="material-icons feature-icon">security</i>
+                        <h3>Dados Seguros</h3>
+                        <p>Validação de dados, tratamento de erros e interface com feedback visual para operações seguras.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Comece a Organizar Hoje</h2>
+                <p>Junte-se aos profissionais que confiam no EventosApp para gestão eficiente de eventos</p>
+                <a href="/cadastro" class="btn-primary">
+                    <i class="material-icons">get_started</i>
+                    Criar Conta Grátis
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 EventosApp. Sistema profissional de gestão de eventos.</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // Controle de navegação entre páginas
+        function showHome() {
+            document.getElementById('homePage').style.display = 'block';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            M.updateTextFields();
+        });
+
+        // Verificar se há mensagem de sucesso/erro na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('sucesso')) {
+            alert('Operação realizada com sucesso!');
+        }
+        if (urlParams.get('erro')) {
+            alert('Erro: ' + urlParams.get('erro'));
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - EventosApp</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cadastro-container {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            color: #2196F3;
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+
+        .page-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .form-container {
+            margin-top: 30px;
+        }
+
+        .input-field {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-field label {
+            color: #b0b0b0 !important;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-field label.active {
+            color: #2196F3 !important;
+        }
+
+        .input-field input[type=text],
+        .input-field input[type=email],
+        .input-field input[type=password] {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ffffff !important;
+            padding: 12px 16px !important;
+            font-size: 14px;
+            height: auto !important;
+            margin: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .input-field input[type=text]:focus,
+        .input-field input[type=email]:focus,
+        .input-field input[type=password]:focus {
+            border-color: #2196F3 !important;
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2) !important;
+            background-color: #2a2a2a !important;
+        }
+
+
+        .btn-cadastrar {
+            background-color: #2196F3;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-cadastrar:hover {
+            background-color: #1976D2;
+            transform: translateY(-1px);
+        }
+
+        .btn-cadastrar:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #333;
+        }
+
+        .divider span {
+            background-color: #1a1a1a;
+            color: #888;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link p {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            color: #64B5F6;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #b0b0b0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #2196F3;
+        }
+
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 1px solid #f44336;
+            border-radius: 6px;
+            color: #f44336;
+            padding: 12px 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .field-error {
+            color: #f44336;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .success-message {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            border-radius: 6px;
+            color: #4CAF50;
+            padding: 12px 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .cadastro-container {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+
+            .back-link {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">
+        <i class="material-icons">arrow_back</i>
+        Voltar para início
+    </a>
+
+    <div class="cadastro-container">
+        <div class="logo-section">
+            <a href="/" class="logo">
+                <i class="material-icons">event_available</i>
+                EventosApp
+            </a>
+            <h1 class="page-title">Criar Conta</h1>
+            <p class="page-subtitle">Preencha os dados para começar a organizar seus eventos</p>
+        </div>
+
+        <!-- Mensagem de erro geral -->
+        <div th:if="${erro}" class="error-message" th:text="${erro}"></div>
+        
+        <!-- Mensagem de sucesso -->
+        <div th:if="${sucesso}" class="success-message" th:text="${sucesso}"></div>
+
+        <div class="form-container">
+            <form id="cadastroForm" method="post" th:action="@{/cadastro}" th:object="${usuario}">
+                <div class="input-field" th:classappend="${#fields.hasErrors('nome')} ? 'error'">
+                    <input type="text" id="nome" name="nome" th:field="*{nome}" required>
+                    <label for="nome">Nome Completo</label>
+                    <span th:if="${#fields.hasErrors('nome')}" class="field-error" th:errors="*{nome}"></span>
+                </div>
+
+                <div class="input-field" th:classappend="${#fields.hasErrors('email')} ? 'error'">
+                    <input type="email" id="email" name="email" th:field="*{email}" required>
+                    <label for="email">E-mail</label>
+                    <span th:if="${#fields.hasErrors('email')}" class="field-error" th:errors="*{email}"></span>
+                    <span id="emailExisteError" class="field-error" style="display: none;">Este e-mail já está em uso</span>
+                </div>
+
+                <div class="input-field" th:classappend="${#fields.hasErrors('senha')} ? 'error'">
+                    <input type="password" id="senha" name="senha" th:field="*{senha}" required minlength="6">
+                    <label for="senha">Senha</label>
+                    <span th:if="${#fields.hasErrors('senha')}" class="field-error" th:errors="*{senha}"></span>
+                    <span id="senhaError" class="field-error" style="display: none;">Senha deve ter no mínimo 6 caracteres</span>
+                </div>
+
+                <div class="input-field">
+                    <input type="password" id="confirmaSenha" name="confirmaSenha" required>
+                    <label for="confirmaSenha">Confirmar Senha</label>
+                    <span id="confirmaSenhaError" class="field-error" style="display: none;">Senhas não coincidem</span>
+                </div>
+
+                <button type="submit" class="btn-cadastrar" id="btnCadastrar">
+                    Criar Conta
+                </button>
+            </form>
+        </div>
+
+        <div class="divider">
+            <span>ou</span>
+        </div>
+
+        <div class="login-link">
+            <p>Já tem uma conta? <a href="/login">Fazer login</a></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.updateTextFields();
+            
+            const form = document.getElementById('cadastroForm');
+            const btnCadastrar = document.getElementById('btnCadastrar');
+            const nomeInput = document.getElementById('nome');
+            const emailInput = document.getElementById('email');
+            const senhaInput = document.getElementById('senha');
+            const confirmaSenhaInput = document.getElementById('confirmaSenha');
+
+            // Validação em tempo real
+            nomeInput.addEventListener('blur', validateNome);
+            nomeInput.addEventListener('input', clearFieldError);
+            
+            emailInput.addEventListener('blur', validateEmail);
+            emailInput.addEventListener('input', clearFieldError);
+            
+            senhaInput.addEventListener('input', validateSenha);
+            confirmaSenhaInput.addEventListener('input', validateConfirmaSenha);
+
+            // Validação de confirmação de senha
+            function validateConfirmaSenha() {
+                const senha = senhaInput.value;
+                const confirmaSenha = confirmaSenhaInput.value;
+                const error = document.getElementById('confirmaSenhaError');
+                const inputField = confirmaSenhaInput.closest('.input-field');
+                
+                if (confirmaSenha && senha !== confirmaSenha) {
+                    error.style.display = 'block';
+                    inputField.classList.add('error');
+                    return false;
+                } else {
+                    error.style.display = 'none';
+                    inputField.classList.remove('error');
+                    return true;
+                }
+            }
+
+            function validateSenha() {
+                const senha = senhaInput.value;
+                const error = document.getElementById('senhaError');
+                const inputField = senhaInput.closest('.input-field');
+                
+                if (senha && senha.length < 6) {
+                    error.style.display = 'block';
+                    inputField.classList.add('error');
+                    return false;
+                } else {
+                    error.style.display = 'none';
+                    inputField.classList.remove('error');
+                    return true;
+                }
+            }
+
+            function validateNome() {
+                const nome = nomeInput.value.trim();
+                const inputField = nomeInput.closest('.input-field');
+                
+                if (nome.length < 2) {
+                    inputField.classList.add('error');
+                    return false;
+                } else {
+                    inputField.classList.remove('error');
+                    return true;
+                }
+            }
+
+            function validateEmail() {
+                const email = emailInput.value.trim();
+                const inputField = emailInput.closest('.input-field');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!emailRegex.test(email)) {
+                    inputField.classList.add('error');
+                    return false;
+                } else {
+                    inputField.classList.remove('error');
+                    // Verificar se email já existe
+                    checkEmailExists(email);
+                    return true;
+                }
+            }
+
+            function checkEmailExists(email) {
+                if (!email || email.length < 5) return;
+                
+                fetch('/api/verificar-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'email=' + encodeURIComponent(email)
+                })
+                .then(response => response.json())
+                .then(exists => {
+                    const error = document.getElementById('emailExisteError');
+                    const inputField = emailInput.closest('.input-field');
+                    
+                    if (exists) {
+                        error.style.display = 'block';
+                        inputField.classList.add('error');
+                    } else {
+                        error.style.display = 'none';
+                        inputField.classList.remove('error');
+                    }
+                })
+                .catch(error => {
+                    console.log('Erro ao verificar email:', error);
+                });
+            }
+
+            function clearFieldError(e) {
+                const inputField = e.target.closest('.input-field');
+                if (e.target.value.trim()) {
+                    inputField.classList.remove('error');
+                    
+                    // Esconder erros específicos do campo
+                    const fieldErrors = inputField.querySelectorAll('.field-error');
+                    fieldErrors.forEach(error => {
+                        if (error.id && error.id.includes(e.target.name)) {
+                            error.style.display = 'none';
+                        }
+                    });
+                }
+            }
+
+            // Envio do formulário
+            form.addEventListener('submit', function(e) {
+                // Validar todos os campos antes do envio
+                const nomeValido = validateNome();
+                const emailValido = validateEmail();
+                const senhaValida = validateSenha();
+                const confirmaSenhaValida = validateConfirmaSenha();
+                
+                if (!nomeValido || !emailValido || !senhaValida || !confirmaSenhaValida) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Verificar se email já existe
+                const emailError = document.getElementById('emailExisteError');
+                if (emailError.style.display === 'block') {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Adicionar indicador de loading
+                btnCadastrar.disabled = true;
+                btnCadastrar.textContent = 'Criando conta...';
+                form.classList.add('loading');
+            });
+
+            // Se há erro de servidor, mostrar feedback visual
+            const errorElements = document.querySelectorAll('.field-error');
+            errorElements.forEach(error => {
+                if (error.textContent.trim()) {
+                    const inputField = error.closest('.input-field');
+                    if (inputField) {
+                        inputField.classList.add('error');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
