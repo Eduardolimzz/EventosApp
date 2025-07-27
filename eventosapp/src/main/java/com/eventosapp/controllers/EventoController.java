@@ -1,6 +1,8 @@
 package com.eventosapp.controllers;
 
 import java.util.Optional;
+import java.util.ArrayList; 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,11 +61,18 @@ public class EventoController {
 
     @RequestMapping(value="/detalhesEvento/{codigo}", method=RequestMethod.GET)
     public ModelAndView detalhesEvento(@PathVariable("codigo") long codigo){
-        Evento evento = er.findByCodigo(codigo); 
+        Evento evento = er.findByCodigo(codigo);
         ModelAndView mv = new ModelAndView("evento/detalhesEvento");
         mv.addObject("evento", evento);
-        Iterable<Convidado> convidados = cr.findByEvento(evento);
-        mv.addObject("convidados", convidados);
+
+        Iterable<Convidado> convidadosIterable = cr.findByEvento(evento);
+
+        List<Convidado> convidados = new ArrayList<>();
+        convidadosIterable.forEach(convidados::add); 
+
+        mv.addObject("convidados", convidados); 
+        mv.addObject("totalConvidados", convidados.size());
+
         return mv;
     }
     
@@ -110,9 +119,10 @@ public class EventoController {
         return "redirect:/detalhesEvento/{codigo}";
     }
     
-    @RequestMapping(value = "/deletarConvidado/{id}", method = RequestMethod.GET)
-    public String deletarConvidado(@PathVariable("id") long id, RedirectAttributes attributes) {
-        Optional<Convidado> convidadoOptional = cr.findById(id);
+    @RequestMapping(value = "/deletarConvidado/{rg}", method = RequestMethod.GET)
+    public String deletarConvidado(@PathVariable("rg") String rg, RedirectAttributes attributes) {
+       
+        Optional<Convidado> convidadoOptional = cr.findById(rg);
 
         if (convidadoOptional.isPresent()) {
             Convidado convidado = convidadoOptional.get();

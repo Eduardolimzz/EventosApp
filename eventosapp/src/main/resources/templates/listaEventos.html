@@ -1,70 +1,267 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>EventosApp</title>
+<title>EventosApp</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* Fundo escuro elegante */
+body {
+    background-color: #212121; 
+    background-attachment: fixed; 
+    min-height: 100vh;
+    color: #e0e0e0; 
+    font-family: 'Roboto', sans-serif; 
+}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
-	<style>
-	        .btn.red {
-	            width: 35px; 
-	            padding-left: 0;
-	            padding-right: 0;
-	            display: flex; 
-	            justify-content: center; 
-	            align-items: center; 
-	        }
+/* Container principal */
+.container {
+    margin-top: 20px;
+}
 
-	        .btn.red i.material-icons {
-	            margin: 0; 
-	        }
-	    </style>
+/* Título principal */
+h1 {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* Seção de navegação */
+.navigation-section {
+    border-radius: 12px;
+    padding: 5px -10px;
+    margin-bottom: 15x;
+    text-align: center;
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+/* Botões de navegação */
+.nav-btn {
+    background: linear-gradient(45deg, #2196F3, #1976D2) !important;
+    border-radius: 8px;
+    margin: 5px;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Card principal */
+.main-card {
+    background: rgba(60, 60, 60, 0.4);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.card-content {
+    padding: 30px !important;
+}
+
+.card-title {
+    color: #ffffff !important;
+    font-size: 28px !important;
+    font-weight: bold !important;
+    margin-bottom: 30px !important;
+    text-align: center;
+}
+
+/* Tabela de eventos */
+.events-table {
+    background: rgba(60, 60, 60, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.events-table table {
+    background: transparent;
+    margin: 0;
+}
+
+.events-table thead {
+    background: rgba(255,255,255,0.05);
+}
+
+.events-table thead th {
+    color: #ffffff !important;
+    font-weight: 500;
+    padding: 18px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    font-size: 15px;
+}
+
+.events-table tbody tr {
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s ease;
+}
+
+.events-table tbody tr:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.events-table tbody td {
+    color: #e0e0e0;
+    padding: 16px 15px;
+    font-size: 14px;
+}
+
+/* Links dos eventos */
+.event-link {
+    color: #64B5F6 !important;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.event-link:hover {
+    color: #42A5F5 !important;
+    text-decoration: underline;
+}
+
+/* Botão de deletar */
+.delete-btn {
+    background: rgba(244, 67, 54, 0.8) !important;
+    border-radius: 6px;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    height: 34px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+}
+
+.delete-btn:hover {
+    background: rgba(244, 67, 54, 1) !important;
+    transform: translateY(-1px);
+}
+
+.delete-btn i.material-icons {
+    font-size: 18px !important;
+    margin: 0 !important;
+}
+
+/* Responsividade melhorada */
+@media only screen and (max-width: 992px) {
+    .events-table {
+        overflow-x: auto;
+    }
+    
+    .events-table table {
+        min-width: 600px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        margin-top: 10px;
+        padding: 0 10px;
+    }
+    
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .card-content {
+        padding: 20px !important;
+    }
+    
+    .navigation-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .events-table thead th,
+    .events-table tbody td {
+        padding: 12px 8px;
+        font-size: 12px;
+    }
+}
+
+/* Animações suaves */
+.card {
+    transition: all 0.3s ease;
+}
+
+/* Efeitos de glassmorphism */
+.glass-effect {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <h1 class="center-align">Lista de Eventos</h1>
-                
-                <div class="section">
-                    <a href="/cadastrarEvento" class="waves-effect waves-light btn blue">
-                        <i class="material-icons left">add_circle_outline</i>Cadastrar Evento
-                    </a>
-                </div>
-                
-                <div class="section">
-                    <table class="striped responsive-table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Local</th>
-                                <th>Data</th>
-                                <th>Horário</th>
-								<th>Deletar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="evento : ${eventos}">
-                                <td><a th:href="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}" th:text="${evento.nome}"></a></td>
-                                <td><span th:text="${evento.local}"></span></td>
-                                <td><span th:text="${evento.data}"></span></td>
-                                <td><span th:text="${evento.horario}"></span></td>
-								<td>								<a class="waves-effect waves-light btn red" th:href="@{/deletarEvento/{codigo}(codigo=${evento.codigo})}">
-								    <i class="material-icons left">delete</i>
-								</a>
-								</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container">
+<div class="row">
+<div class="col s12 m10 offset-m1">
+<h1 class="center-align">Lista de Eventos</h1>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<div class="section navigation-section">
+<div class="center-align">
+<a href="/cadastrarEvento" class="waves-effect waves-light btn nav-btn">
+<i class="material-icons left">add_circle_outline</i>Cadastrar Evento
+</a>
+</div>
+</div>
+
+<div class="section">
+<div class="events-table">
+<table class="responsive-table">
+<thead>
+<tr>
+<th>Nome</th>
+<th>Local</th>
+<th>Data</th>
+<th>Horário</th>
+<th>Deletar</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="evento : ${eventos}">
+<td><a th:href="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}" th:text="${evento.nome}" class="event-link"></a></td>
+<td><span th:text="${evento.local}"></span></td>
+<td><span th:text="${evento.data}"></span></td>
+<td><span th:text="${evento.horario}"></span></td>
+<td>
+<a class="waves-effect waves-light btn delete-btn" th:href="@{/deletarEvento/{codigo}(codigo=${evento.codigo})}">
+<i class="material-icons">delete</i>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    M.AutoInit();
+});
+</script>
 </body>
 </html>
