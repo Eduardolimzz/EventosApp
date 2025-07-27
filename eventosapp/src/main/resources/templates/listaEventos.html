@@ -1,267 +1,539 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>EventosApp</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>EventosApp</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<style>
-/* Fundo escuro elegante */
-body {
-    background-color: #212121; 
-    background-attachment: fixed; 
-    min-height: 100vh;
-    color: #e0e0e0; 
-    font-family: 'Roboto', sans-serif; 
-}
+    <style>
+        /* Fundo escuro elegante */
+        body {
+            background-color: #212121;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+        }
 
-/* Container principal */
-.container {
-    margin-top: 20px;
-}
+        /* Container principal */
+        .container {
+            margin-top: 20px;
+        }
 
-/* Título principal */
-h1 {
-    color: #ffffff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    margin-bottom: 30px;
-    font-weight: 300;
-}
+        /* Título principal */
+        h1 {
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
 
-/* Seção de navegação */
-.navigation-section {
-    border-radius: 12px;
-    padding: 5px -10px;
-    margin-bottom: 15x;
-    text-align: center;
-    display: inline-flex;
-    align-items: center; 
-    justify-content: center; 
-}
+        /* Seção de navegação */
+        .navigation-section {
+            border-radius: 12px;
+            padding: 5px -10px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Botões de navegação */
-.nav-btn {
-    background: linear-gradient(45deg, #2196F3, #1976D2) !important;
-    border-radius: 8px;
-    margin: 5px;
-    box-shadow: none;
-    transition: all 0.3s ease;
-}
+        /* Botões de navegação */
+        .nav-btn {
+            background: linear-gradient(45deg, #2196F3, #1976D2) !important;
+            border-radius: 8px;
+            margin: 5px;
+            box-shadow: none;
+            transition: all 0.3s ease;
+        }
 
-.nav-btn:hover {
-    transform: translateY(-2px);
-}
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
 
-/* Card principal */
-.main-card {
-    background: rgba(60, 60, 60, 0.4);
-    backdrop-filter: blur(15px);
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    overflow: hidden;
-}
+        /* Card principal */
+        .main-card {
+            background: rgba(60, 60, 60, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
 
-.card-content {
-    padding: 30px !important;
-}
+        .card-content {
+            padding: 30px !important;
+        }
 
-.card-title {
-    color: #ffffff !important;
-    font-size: 28px !important;
-    font-weight: bold !important;
-    margin-bottom: 30px !important;
-    text-align: center;
-}
+        .card-title {
+            color: #ffffff !important;
+            font-size: 28px !important;
+            font-weight: bold !important;
+            margin-bottom: 30px !important;
+            text-align: center;
+        }
 
-/* Tabela de eventos */
-.events-table {
-    background: rgba(60, 60, 60, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-}
+        /* Tabela de eventos */
+        .events-table {
+            background: rgba(60, 60, 60, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-.events-table table {
-    background: transparent;
-    margin: 0;
-}
+        .events-table table {
+            background: transparent;
+            margin: 0;
+        }
 
-.events-table thead {
-    background: rgba(255,255,255,0.05);
-}
+        .events-table thead {
+            background: rgba(255,255,255,0.05);
+        }
 
-.events-table thead th {
-    color: #ffffff !important;
-    font-weight: 500;
-    padding: 18px 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    font-size: 15px;
-}
+        .events-table thead th {
+            color: #ffffff !important;
+            font-weight: 500;
+            padding: 18px 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 15px;
+        }
 
-.events-table tbody tr {
-    background: transparent;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.3s ease;
-}
+        .events-table tbody tr {
+            background: transparent;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
+        }
 
-.events-table tbody tr:hover {
-    background: rgba(255,255,255,0.05);
-}
+        .events-table tbody tr:hover {
+            background: rgba(255,255,255,0.05);
+        }
 
-.events-table tbody td {
-    color: #e0e0e0;
-    padding: 16px 15px;
-    font-size: 14px;
-}
+        .events-table tbody td {
+            color: #e0e0e0;
+            padding: 16px 15px;
+            font-size: 14px;
+        }
 
-/* Links dos eventos */
-.event-link {
-    color: #64B5F6 !important;
-    text-decoration: none;
-    font-weight: 400;
-    transition: all 0.3s ease;
-}
+        /* Links dos eventos */
+        .event-link {
+            color: #64B5F6 !important;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
 
-.event-link:hover {
-    color: #42A5F5 !important;
-    text-decoration: underline;
-}
+        .event-link:hover {
+            color: #42A5F5 !important;
+            text-decoration: underline;
+        }
 
-/* Botão de deletar */
-.delete-btn {
-    background: rgba(244, 67, 54, 0.8) !important;
-    border-radius: 6px;
-    padding: 8px 12px !important;
-    font-size: 14px !important;
-    transition: all 0.3s ease;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
-    height: 34px !important;
-    width: 34px !important;
-    min-width: 34px !important;
-}
+        /* Botões de Ação (Editar, Excluir, Salvar, Cancelar) */
+        .action-btn {
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            height: 36px !important;
+            width: 36px !important;
+            min-width: 36px !important;
+            padding: 0 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-right: 8px !important; /* Espaçamento entre os botões */
+        }
+        .action-btn:last-child {
+            margin-right: 0 !important; /* Remove margem do último botão */
+        }
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+        .action-btn i {
+            font-size: 18px !important;
+            margin: 0 !important;
+        }
+        .edit-btn { background: rgba(255, 193, 7, 0.8) !important; } /* Âmbar */
+        .edit-btn:hover { background: rgba(255, 193, 7, 1) !important; }
+        .delete-btn { background: rgba(244, 67, 54, 0.8) !important; } /* Vermelho */
+        .delete-btn:hover { background: rgba(244, 67, 54, 1) !important; }
+        .save-btn { background: rgba(76, 175, 80, 0.8) !important; } /* Verde */
+        .save-btn:hover { background: rgba(76, 175, 80, 1) !important; }
+        .cancel-btn { background: rgba(158, 158, 158, 0.8) !important; } /* Cinza */
+        .cancel-btn:hover { background: rgba(158, 158, 158, 1) !important; }
 
-.delete-btn:hover {
-    background: rgba(244, 67, 54, 1) !important;
-    transform: translateY(-1px);
-}
+        /* Estilos para os campos de input de edição na tabela */
+        .edit-input {
+            background: rgba(255,255,255,0.1) !important;
+            border: 1px solid #2196F3 !important;
+            border-radius: 4px !important;
+            padding: 8px 12px !important;
+            color: #ffffff !important;
+            font-size: 14px !important;
+            width: 100% !important;
+            margin: 0 !important;
+            box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
+            height: auto; /* Permite que a altura se ajuste ao conteúdo */
+        }
+        .edit-input:focus {
+            outline: none !important;
+            border-color: #64B5F6 !important;
+            box-shadow: 0 0 5px rgba(33, 150, 243, 0.5) !important;
+        }
 
-.delete-btn i.material-icons {
-    font-size: 18px !important;
-    margin: 0 !important;
-}
+        /* Modos de exibição para itens do evento */
+        .edit-mode { display: none; } /* Oculto quando não está editando */
+        .view-mode { display: inline-block; } /* Visível quando não está editando */
+        .editing .view-mode { display: none; } /* Oculta o modo de visualização quando a linha está em edição */
+        .editing .edit-mode { display: inline-block; } /* Mostra o modo de edição quando a linha está em edição */
 
-/* Responsividade melhorada */
-@media only screen and (max-width: 992px) {
-    .events-table {
-        overflow-x: auto;
-    }
-    
-    .events-table table {
-        min-width: 600px;
-    }
-}
+        /* Estilo para a linha da tabela quando está sendo editada */
+        .events-table tbody tr.editing {
+            background: rgba(33, 150, 243, 0.1) !important; /* Fundo azul claro ao editar */
+            border-left: 3px solid #2196F3 !important; /* Borda azul à esquerda */
+        }
 
-@media only screen and (max-width: 600px) {
-    .container {
-        margin-top: 10px;
-        padding: 0 10px;
-    }
-    
-    h1 {
-        font-size: 28px;
-        margin-bottom: 20px;
-    }
-    
-    .card-content {
-        padding: 20px !important;
-    }
-    
-    .navigation-section {
-        padding: 15px;
-        margin-bottom: 20px;
-    }
 
-    .events-table thead th,
-    .events-table tbody td {
-        padding: 12px 8px;
-        font-size: 12px;
-    }
-}
+        /* Overlay de Carregamento */
+        .loading-overlay {
+            position: fixed; /* Posição fixa para cobrir a tela inteira */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7); /* Preto semi-transparente */
+            display: none; /* Oculto por padrão */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Garante que fique acima de outros conteúdos */
+        }
+        /* Animação do Spinner de Carregamento */
+        .loading-spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #2196F3; /* Borda superior azul para efeito de spinner */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite; /* Animação de giro */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-/* Animações suaves */
-.card {
-    transition: all 0.3s ease;
-}
 
-/* Efeitos de glassmorphism */
-.glass-effect {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-</style>
+        /* Responsividade melhorada */
+        @media only screen and (max-width: 992px) {
+            .events-table {
+                overflow-x: auto;
+            }
+
+            .events-table table {
+                min-width: 700px; /* Aumentado para acomodar os novos botões e inputs */
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin-top: 10px;
+                padding: 0 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .card-content {
+                padding: 20px !important;
+            }
+
+            .navigation-section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .events-table thead th,
+            .events-table tbody td {
+                padding: 12px 8px;
+                font-size: 12px;
+            }
+
+            /* Ajuste para botões em telas pequenas */
+            .action-btn {
+                margin-right: 4px !important;
+                height: 30px !important;
+                width: 30px !important;
+                min-width: 30px !important;
+            }
+            .action-btn i {
+                font-size: 16px !important;
+            }
+        }
+
+        /* Animações suaves */
+        .card {
+            transition: all 0.3s ease;
+        }
+
+        /* Efeitos de glassmorphism */
+        .glass-effect {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<div class="row">
-<div class="col s12 m10 offset-m1">
-<h1 class="center-align">Lista de Eventos</h1>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
 
-<div class="section navigation-section">
-<div class="center-align">
-<a href="/cadastrarEvento" class="waves-effect waves-light btn nav-btn">
-<i class="material-icons left">add_circle_outline</i>Cadastrar Evento
-</a>
-</div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <h1 class="center-align">Lista de Eventos</h1>
 
-<div class="section">
-<div class="events-table">
-<table class="responsive-table">
-<thead>
-<tr>
-<th>Nome</th>
-<th>Local</th>
-<th>Data</th>
-<th>Horário</th>
-<th>Deletar</th>
-</tr>
-</thead>
-<tbody>
-<tr th:each="evento : ${eventos}">
-<td><a th:href="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}" th:text="${evento.nome}" class="event-link"></a></td>
-<td><span th:text="${evento.local}"></span></td>
-<td><span th:text="${evento.data}"></span></td>
-<td><span th:text="${evento.horario}"></span></td>
-<td>
-<a class="waves-effect waves-light btn delete-btn" th:href="@{/deletarEvento/{codigo}(codigo=${evento.codigo})}">
-<i class="material-icons">delete</i>
-</a>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+                <th:block th:insert="~{mensagemValidacao}"></th:block>
 
-</div>
-</div>
-</div>
+                <div class="section navigation-section">
+                    <div class="center-align">
+                        <a href="/cadastrarEvento" class="waves-effect waves-light btn nav-btn">
+                            <i class="material-icons left">add_circle_outline</i>Cadastrar Evento
+                        </a>
+                    </div>
+                </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    M.AutoInit();
-});
-</script>
+                <div class="section">
+                    <div class="events-table">
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Local</th>
+                                    <th>Data</th>
+                                    <th>Horário</th>
+                                    <th>Ações</th> </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="evento : ${eventos}" th:data-codigo="${evento.codigo}">
+                                    <td>
+                                        <a th:href="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}" th:text="${evento.nome}" class="event-link view-mode"></a>
+                                        <input type="text" class="edit-input edit-mode" name="nome" th:value="${evento.nome}">
+                                    </td>
+                                    <td>
+                                        <span class="view-mode" th:text="${evento.local}"></span>
+                                        <input type="text" class="edit-input edit-mode" name="local" th:value="${evento.local}">
+                                    </td>
+                                    <td>
+                                        <span class="view-mode" th:text="${evento.data}"></span>
+                                        <input type="text" class="edit-input edit-mode" name="data" th:value="${evento.data}">
+                                    </td>
+                                    <td>
+                                        <span class="view-mode" th:text="${evento.horario}"></span>
+                                        <input type="text" class="edit-input edit-mode" name="horario" th:value="${evento.horario}">
+                                    </td>
+                                    <td class="center-align">
+                                        <div class="view-mode">
+                                            <a class="btn action-btn edit-btn waves-effect waves-light" onclick="editEvent(this)">
+                                                <i class="material-icons">edit</i>
+                                            </a>
+                                            <a th:href="@{/deletarEvento/{codigo}(codigo=${evento.codigo})}"
+                                               class="btn action-btn delete-btn waves-effect waves-light">
+                                                <i class="material-icons">delete</i>
+                                            </a>
+                                        </div>
+                                        <div class="edit-mode">
+                                            <a class="btn action-btn save-btn waves-effect waves-light" onclick="saveEvent(this)">
+                                                <i class="material-icons">save</i>
+                                            </a>
+                                            <a class="btn action-btn cancel-btn waves-effect waves-light" onclick="cancelEdit(this)">
+                                                <i class="material-icons">cancel</i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script>
+	    document.addEventListener('DOMContentLoaded', function() {
+	        M.AutoInit();
+	    });
+
+	    // Obtém o elemento do overlay de carregamento
+	    const loading = document.getElementById('loadingOverlay');
+
+	    /**
+	     * @function showLoading
+	     * @description Exibe o overlay de carregamento.
+	     */
+	    const showLoading = () => loading.style.display = 'flex';
+
+	    /**
+	     * @function hideLoading
+	     * @description Oculta o overlay de carregamento.
+	     */
+	    const hideLoading = () => loading.style.display = 'none';
+
+	    /**
+	     * @function editEvent
+	     * @param {HTMLElement} btn - O botão de edição clicado.
+	     * @description Alterna o modo de exibição de uma linha de evento do modo de visualização para o modo de edição.
+	     * Ele oculta elementos do modo de visualização, mostra elementos do modo de edição e adiciona
+	     * uma classe 'editing' para estilização visual.
+	     */
+	    function editEvent(btn) {
+	        const row = btn.closest('tr'); // Encontra a linha da tabela (tr)
+	        row.classList.add('editing'); // Adiciona a classe 'editing' à linha
+
+	        // Oculta elementos de visualização e mostra elementos de edição dentro da linha
+	        row.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');
+	        row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'inline-block');
+
+	        // Foca no primeiro campo de edição (nome do evento)
+	        row.querySelector('input[name="nome"]').focus();
+	    }
+
+	    /**
+	     * @function cancelEdit
+	     * @param {HTMLElement} btn - O botão de cancelar clicado.
+	     * @description Reverte uma linha de evento do modo de edição para o modo de visualização.
+	     * Ele oculta elementos do modo de edição, mostra elementos do modo de visualização, remove
+	     * a classe 'editing' e restaura os valores originais nos campos de entrada.
+	     */
+	    function cancelEdit(btn) {
+	        const row = btn.closest('tr');
+	        row.classList.remove('editing'); // Remove a classe 'editing'
+
+	        // Mostra elementos de visualização e oculta elementos de edição dentro da linha
+	        row.querySelectorAll('.view-mode').forEach(el => el.style.display = 'inline-block');
+	        row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+
+	        // Restaura os valores originais nos campos de entrada
+	        const originalValues = {};
+	        // Itera sobre os spans para obter os valores originais
+	        row.querySelectorAll('.view-mode').forEach(span => {
+	            const parentTd = span.closest('td');
+	            if (parentTd) {
+	                // Mapeia o nome do input para o valor do span (ajuste conforme suas colunas)
+	                // Usar classes específicas ou IDs para cada span/input pode ser mais robusto
+	                if (span.closest('td').querySelector('input[name="nome"]')) {
+	                    originalValues.nome = span.textContent.trim();
+	                } else if (span.closest('td').querySelector('input[name="local"]')) {
+	                    originalValues.local = span.textContent.trim();
+	                } else if (span.closest('td').querySelector('input[name="data"]')) {
+	                    originalValues.data = span.textContent.trim();
+	                } else if (span.closest('td').querySelector('input[name="horario"]')) {
+	                    originalValues.horario = span.textContent.trim();
+	                }
+	            }
+	        });
+
+	        // Define os valores dos inputs de volta aos valores originais
+	        row.querySelector('input[name="nome"]').value = originalValues.nome || '';
+	        row.querySelector('input[name="local"]').value = originalValues.local || '';
+	        row.querySelector('input[name="data"]').value = originalValues.data || '';
+	        row.querySelector('input[name="horario"]').value = originalValues.horario || '';
+	    }
+
+	    /**
+	     * @function saveEvent
+	     * @param {HTMLElement} btn - O botão de salvar clicado.
+	     * @description Salva as informações editadas do evento no servidor via uma requisição AJAX POST.
+	     * Ele realiza validação no lado do cliente, mostra um indicador de carregamento, envia os dados
+	     * e lida com a resposta do servidor.
+	     */
+	    function saveEvent(btn) {
+	        const row = btn.closest('tr');
+	        const codigo = row.dataset.codigo; // Obtém o código do evento do atributo data-codigo
+
+	        const nomeInput = row.querySelector('input[name="nome"]');
+	        const localInput = row.querySelector('input[name="local"]');
+	        const dataInput = row.querySelector('input[name="data"]');
+	        const horarioInput = row.querySelector('input[name="horario"]');
+
+	        const newNome = nomeInput.value.trim();
+	        const newLocal = localInput.value.trim();
+	        const newData = dataInput.value.trim();
+	        const newHorario = horarioInput.value.trim();
+
+	        // Validação no lado do cliente (adapte conforme suas regras de validação)
+	        if (!newNome || !newLocal || !newData || !newHorario) {
+	            M.toast({html: 'Todos os campos do evento são obrigatórios!', classes: 'red'});
+	            // Foca no primeiro campo vazio para facilitar a correção
+	            if (!newNome) nomeInput.focus();
+	            else if (!newLocal) localInput.focus();
+	            else if (!newData) dataInput.focus();
+	            else horarioInput.focus();
+	            return;
+	        }
+
+	        showLoading(); // Mostra o indicador de carregamento
+
+	        const dataToSend = {
+	            codigo: codigo,
+	            nome: newNome,
+	            local: newLocal,
+	            data: newData,
+	            horario: newHorario
+	        };
+
+	        fetch('/editarEvento', {
+	            method: 'POST',
+	            headers: { 'Content-Type': 'application/json' },
+	            body: JSON.stringify(dataToSend) // Envia dados como JSON
+	        })
+	        .then(response => response.text()) // Obtém a resposta como texto
+	        .then(result => {
+	            hideLoading(); // Oculta o indicador de carregamento
+	            const cleanResult = result.trim(); // Remove espaços em branco da resposta
+
+	            if (cleanResult === 'success') {
+	                M.toast({html: 'Evento atualizado com sucesso!', classes: 'green'});
+	                // Reload the page to ensure all data and Materialize components are correctly re-rendered
+	                window.location.reload(); 
+	            } else if (cleanResult === 'not_found') {
+	                M.toast({html: 'Evento não encontrado para atualização!', classes: 'red'});
+	            } else {
+	                M.toast({html: 'Erro ao salvar dados do evento. Tente novamente.', classes: 'red'});
+	                console.error('Erro ao salvar evento:', cleanResult);
+	            }
+	        })
+	        .catch(error => {
+	            hideLoading(); // Oculta o indicador de carregamento em caso de erro
+	            console.error('Erro de rede ou servidor ao salvar evento:', error);
+	            M.toast({html: 'Erro de comunicação com o servidor. Tente novamente.', classes: 'orange'});
+	        });
+	    }
+
+	    // Atalhos de teclado para edição
+	    document.addEventListener('keydown', function(e) {
+	        const activeElement = document.activeElement; // Obtém o elemento atualmente focado
+	        // Verifica se o elemento focado é um dos campos de entrada de edição e está dentro de uma linha de evento
+	        if (activeElement && activeElement.classList.contains('edit-input') && activeElement.closest('tr[data-codigo]')) {
+	            const row = activeElement.closest('tr[data-codigo]'); // Obtém a linha pai do evento
+
+	            if (e.key === 'Enter') {
+	                e.preventDefault(); // Impede o envio do formulário padrão
+	                const saveBtn = row.querySelector('.save-btn');
+	                if (saveBtn) saveEvent(saveBtn);
+	            } else if (e.key === 'Escape') {
+	                const cancelBtn = row.querySelector('.cancel-btn');
+	                if (cancelBtn) cancelEdit(cancelBtn);
+	            }
+	        }
+	    });
+	</script>
 </body>
 </html>
