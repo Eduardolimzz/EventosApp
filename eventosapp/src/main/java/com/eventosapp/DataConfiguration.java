@@ -17,7 +17,7 @@ public class DataConfiguration {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
         String dbUrl = System.getenv("MYSQL_URL"); 
-        String dbUsername = System.getenv("MYSQL_USERNAME"); 
+        String dbUsername = System.getenv("MYSQLUSER");
         String dbPassword = System.getenv("MYSQL_PASSWORD");
 
         if (dbUrl == null || dbUrl.isEmpty()) {
