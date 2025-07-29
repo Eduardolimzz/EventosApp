@@ -16,20 +16,20 @@ public class DataConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-        String dbUrl = System.getenv("MYSQL_URL"); 
-        String dbUsername = System.getenv("MYSQLUSER");
-        String dbPassword = System.getenv("MYSQL_PASSWORD");
+        String railwayDbUrl = System.getenv("MYSQL_URL"); 
+        String railwayDbUser = System.getenv("MYSQLUSER"); 
+        String railwayDbPassword = System.getenv("MYSQL_PASSWORD");
 
-        if (dbUrl == null || dbUrl.isEmpty()) {
-            System.out.println("Variáveis de ambiente do banco de dados não encontradas. Usando configurações locais.");
+        if (railwayDbUrl != null && !railwayDbUrl.isEmpty()) {
+            System.out.println("Variáveis de ambiente do Railway encontradas. Conectando ao MySQL do Railway.");
+            dataSource.setUrl(railwayDbUrl); 
+            dataSource.setUsername(railwayDbUser);
+            dataSource.setPassword(railwayDbPassword);
+        } else {
+            System.out.println("Variáveis de ambiente do banco de dados do Railway não encontradas. Usando configurações locais.");
             dataSource.setUrl("jdbc:mysql://localhost:3306/eventosapp?useTimezone=true&serverTimezone=UTC&useSSL=false");
             dataSource.setUsername("root");
             dataSource.setPassword("126357");
-        } else {
-            System.out.println("Variáveis de ambiente do banco de dados encontradas. Usando configurações do Railway.");
-            dataSource.setUrl(dbUrl);
-            dataSource.setUsername(dbUsername);
-            dataSource.setPassword(dbPassword);
         }
 
         return dataSource;
@@ -40,7 +40,7 @@ public class DataConfiguration {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.MYSQL);
         adapter.setShowSql(true);
-        adapter.setGenerateDdl(true); 
+        adapter.setGenerateDdl(true);
         adapter.setPrepareConnection(true);
         return adapter;
     }
