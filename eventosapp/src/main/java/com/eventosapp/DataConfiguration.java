@@ -16,17 +16,26 @@ public class DataConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-        String railwayDbUrl = System.getenv("MYSQL_URL"); 
-        String railwayDbUser = System.getenv("MYSQLUSER"); 
-        String railwayDbPassword = System.getenv("MYSQL_PASSWORD");
+        String host = System.getenv("MYSQLHOST");
+        String port = System.getenv("MYSQLPORT");
+        String database = System.getenv("MYSQLDATABASE");
+        String user = System.getenv("MYSQLUSER");
+        String password = System.getenv("MYSQLPASSWORD"); 
 
-        if (railwayDbUrl != null && !railwayDbUrl.isEmpty()) {
-            System.out.println("Variáveis de ambiente do Railway encontradas. Conectando ao MySQL do Railway.");
-            dataSource.setUrl(railwayDbUrl); 
-            dataSource.setUsername(railwayDbUser);
-            dataSource.setPassword(railwayDbPassword);
+        if (host != null && user != null && password != null) {
+            System.out.println("Conectando ao MySQL...");
+
+            String jdbcUrl = String.format(
+                "jdbc:mysql://%s:%s/%s?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+                host, port, database
+            );
+
+            dataSource.setUrl(jdbcUrl);
+            dataSource.setUsername(user);
+            dataSource.setPassword(password);
+
         } else {
-            System.out.println("Variáveis de ambiente do banco de dados do Railway não encontradas. Usando configurações locais.");
+            System.out.println("Variáveis não encontradas. Usando configuração local...");
             dataSource.setUrl("jdbc:mysql://localhost:3306/eventosapp?useTimezone=true&serverTimezone=UTC&useSSL=false");
             dataSource.setUsername("root");
             dataSource.setPassword("126357");
