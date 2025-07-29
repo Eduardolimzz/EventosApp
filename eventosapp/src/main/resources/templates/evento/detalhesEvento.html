@@ -110,6 +110,44 @@
             margin-bottom: 8px;
         }
 
+        /* Card de Descrição do Evento */
+        .description-card {
+            background: rgba(60, 60, 60, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            padding: 25px;
+        }
+        .description-card h5 {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 500;
+            margin: 0 0 15px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .description-content {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: -2px -5px;
+            color: #e0e0e0;
+            font-size: 16px;
+            line-height: 1.6;
+			min-height: 30px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .no-description {
+            color: rgba(255,255,255,0.5);
+            font-style: italic;
+            text-align: center;
+        }
+
         /* Cards de Seção (Adicionar Convidado, Lista de Convidados) */
         .section-card {
             background: rgba(60, 60, 60, 0.4); /* Fundo semi-transparente mais escuro */
@@ -360,74 +398,94 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="section" th:if="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}">
+                    <div class="card description-card">
+                        <h5><i class="material-icons">description</i>Descrição do Evento</h5>
+                        <div class="description-content">
+                            <p th:text="${evento.descricao}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section" th:unless="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}">
+                    <div class="card description-card">
+                        <h5><i class="material-icons">description</i>Descrição do Evento</h5>
+                        <div class="description-content no-description">
+                            <p>Nenhuma descrição para este evento.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
                     <div class="card section-card">
                         <div class="card-content">
-                            <h5>Adicionar Convidado</h5>
+                            <h5>Adicionar Novo Convidado</h5>
                             <form method="post" th:action="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}">
                                 <div class="row">
                                     <div class="input-field col s12 m6">
-                                        <input type="text" id="nomeConvidado" name="nomeConvidado" class="validate" required>
+                                        <input id="nomeConvidado" type="text" name="nomeConvidado" class="validate" required>
                                         <label for="nomeConvidado">Nome do Convidado</label>
                                     </div>
                                     <div class="input-field col s12 m6">
-                                        <input type="text" id="rg" name="rg" class="validate" required>
+                                        <input id="rg" type="text" name="rg" class="validate" required>
                                         <label for="rg">Número</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col s12 center-align">
                                         <button type="submit" class="waves-effect waves-light btn add-btn">
-                                            <i class="material-icons left">add_circle_outline</i>Adicionar Convidado
+                                            <i class="material-icons left">person_add</i>Adicionar Convidado
                                         </button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                </div>
 
+                <div class="section">
                     <div class="card section-card">
                         <h5>Lista de Convidados</h5>
                         <div class="collection" th:if="${not #lists.isEmpty(convidados)}">
                             <div class="collection-item" th:each="convidado : ${convidados}" th:data-rg="${convidado.rg}">
                                 <div class="row" style="margin-bottom: 0;">
-                                    <div class="col s12 m3">
-                                        <strong>Nome:</strong>
-                                        <span class="view-mode" th:text="${convidado.nomeConvidado}"></span>
-                                        <input type="text" class="edit-input edit-mode" th:value="${convidado.nomeConvidado}" name="nomeConvidado">
-                                    </div>
-                                    <div class="col s12 m4">
-                                        <strong>Número:</strong>
-                                        <span class="view-mode" th:text="${convidado.rg}"></span>
-                                        <input type="text" class="edit-input edit-mode" th:value="${convidado.rg}" name="rg">
-                                    </div>
-                                    <div class="col s12 m5 center-align">
-                                        <div class="view-mode">
+									<div class="col s12 m3">
+	                                    <strong>Nome:</strong>
+	                                    <span class="view-mode" th:text="${convidado.nomeConvidado}"></span>
+	                                    <input type="text" class="edit-input edit-mode" th:value="${convidado.nomeConvidado}" name="nomeConvidado">
+	                                </div>
+	                                <div class="col s12 m4">
+	                                    <strong>Número:</strong>
+	                                    <span class="view-mode" th:text="${convidado.rg}"></span>
+	                                    <input type="text" class="edit-input edit-mode" th:value="${convidado.rg}" name="rg">
+	                                </div>
+                                    <div class="col s12 m5 center-align"> <div class="view-mode">
                                             <a class="btn action-btn edit-btn waves-effect waves-light" onclick="editGuest(this)">
-                                               <i class="material-icons">edit</i>
+                                                <i class="material-icons">edit</i>
                                             </a>
-                                            <a th:href="@{'/deletarConvidado/' + ${convidado.rg}}"
-                                               class="btn action-btn delete-btn waves-effect waves-light">
-                                               <i class="material-icons">delete</i>
+                                            <a th:href="@{'/deletarConvidado/' + ${convidado.rg} + '/' + ${evento.codigo}}"
+                                               class="btn action-btn delete-btn waves-effect waves-light" onclick="return confirm('Tem certeza que deseja excluir este convidado?');">
+                                                <i class="material-icons">delete</i>
                                             </a>
                                         </div>
                                         <div class="edit-mode">
-                                            <a class="btn action-btn save-btn waves-effect waves-light" onclick="saveGuest(this)">
-                                               <i class="material-icons">save</i>
+                                            <a class="btn action-btn save-btn waves-effect waves-light" onclick="saveGuest(this, [[${evento.codigo}]])">
+                                                <i class="material-icons">save</i>
                                             </a>
                                             <a class="btn action-btn cancel-btn waves-effect waves-light" onclick="cancelEdit(this)">
-                                               <i class="material-icons">cancel</i>
+                                                <i class="material-icons">cancel</i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col s12 m4">
-                            <p><strong>Total de Convidados:</strong> <span th:text="${totalConvidados}"></span></p>
-                        </div>
-                        <div class="no-guests" th:if="${#lists.isEmpty(convidados)}">
+                        <div class="no-guests" th:unless="${not #lists.isEmpty(convidados)}">
                             <p>Nenhum convidado cadastrado ainda.</p>
+                        </div>
+                        <div class="col s12 m4" style="padding: 20px 25px;">
+                            <p><strong>Total de Convidados:</strong> <span th:text="${totalConvidados}"></span></p>
                         </div>
                     </div>
                 </div>
@@ -494,21 +552,28 @@
             // Restaura os valores originais nos campos de entrada
             const nameInput = item.querySelector('input[name="nomeConvidado"]');
             const rgInput = item.querySelector('input[name="rg"]');
-            const nameSpan = item.querySelector('.view-mode span:nth-of-type(1)'); // O span que contém o nome original
-            const rgSpan = item.querySelector('.view-mode span:nth-of-type(2)');   // O span que contém o RG original
+            
+            // Assuming the structure: <strong>Nome:</strong> <span class="view-mode">...</span>
+            // and <strong>Número:</strong> <span class="view-mode">...</span>
+            const originalNameSpan = item.querySelector('.view-mode[th:text*="convidado.nomeConvidado"]');
+            const originalRgSpan = item.querySelector('.view-mode[th:text*="convidado.rg"]');
 
-            if (nameInput && nameSpan) nameInput.value = nameSpan.textContent.trim();
-            if (rgInput && rgSpan) rgInput.value = rgSpan.textContent.trim();
+            if (nameInput && originalNameSpan) nameInput.value = originalNameSpan.textContent.trim();
+            if (rgInput && originalRgSpan) rgInput.value = originalRgSpan.textContent.trim();
+            
+            // Re-activate Materialize labels for correct display after value reset
+            M.updateTextFields();
         }
 
         /**
          * @function saveGuest
          * @param {HTMLElement} btn - O botão de salvar clicado.
+         * @param {number} eventoCodigo - O código do evento ao qual o convidado pertence.
          * @description Salva as informações editadas do convidado no servidor via uma requisição AJAX POST.
          * Ele realiza validação no lado do cliente, mostra um indicador de carregamento, envia os dados
          * e lida com a resposta do servidor (sucesso, RG existente, não encontrado ou erro).
          */
-        function saveGuest(btn) {
+        function saveGuest(btn, eventoCodigo) {
             const item = btn.closest('.collection-item');
             const originalRg = item.dataset.rg; // Obtém o RG original do atributo data-rg
             const nameInput = item.querySelector('input[name="nomeConvidado"]');
@@ -524,18 +589,19 @@
             }
 
             if (!newRg) {
-                M.toast({html: 'O número não pode estar vazio!', classes: 'red'});
+                M.toast({html: 'O número (RG) não pode estar vazio!', classes: 'red'});
                 rgInput.focus();
                 return;
             }
 
             showLoading(); // Mostra o indicador de carregamento
 
-            const data = { rg: originalRg, nomeConvidado: newName };
-            // Se o RG mudou, inclui o novo RG no payload de dados
-            if (originalRg !== newRg) {
-                data.novoRg = newRg;
-            }
+            const data = {
+                oldRg: originalRg, // Send original RG to identify the guest
+                newRg: newRg,      // Send new RG
+                nomeConvidado: newName,
+                eventoCodigo: eventoCodigo // Send event code
+            };
 
             fetch('/editarConvidado', {
                 method: 'POST',
@@ -548,16 +614,24 @@
                 const cleanResult = result.trim(); // Remove espaços em branco da resposta
 
                 if (cleanResult === 'success') {
-                    M.toast({html: '', classes: ''});
-                    window.location.reload(); // Recarrega a página para refletir as mudanças
+                    M.toast({html: 'Convidado atualizado com sucesso!', classes: 'green darken-2'});
+                    // Update the view-mode spans with new values
+                    item.querySelector('.view-mode[th:text*="convidado.nomeConvidado"]').textContent = newName;
+                    item.querySelector('.view-mode[th:text*="convidado.rg"]').textContent = newRg;
+                    item.dataset.rg = newRg; // Update the data-rg attribute for future edits
+
+                    // Revert to view mode
+                    item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'inline');
+                    item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+                    item.classList.remove('editing');
+                    M.updateTextFields(); // Update Materialize labels
                 } else if (cleanResult === 'rg_exists') {
-                    M.toast({html: 'Este número já está sendo usado por outro convidado!', classes: 'red'});
+                    M.toast({html: 'Este número (RG) já está sendo usado por outro convidado!', classes: 'red'});
                     rgInput.focus(); // Foca no campo de RG se for duplicado
                 } else if (cleanResult === 'not_found') {
                     M.toast({html: 'Convidado não encontrado!', classes: 'red'});
                 } else {
-                    // Fallback para resposta de sucesso inesperada ou sucesso parcial
-                    M.toast({html: '', classes: ''});
+                    M.toast({html: 'Erro desconhecido ao salvar. Recarregando página...', classes: 'orange'});
                     setTimeout(() => window.location.reload(), 1500); // Recarrega após um pequeno atraso
                 }
             })
@@ -565,10 +639,54 @@
                 hideLoading(); // Oculta o indicador de carregamento em caso de erro
                 console.error('Erro ao salvar convidado:', error);
                 // Informa o usuário e recarrega em caso de erro de rede ou não tratado
-                M.toast({html: 'Erro ao salvar dados. Recarregando página...', classes: 'orange'});
+                M.toast({html: 'Erro de comunicação ao salvar dados. Recarregando página...', classes: 'orange'});
                 setTimeout(() => window.location.reload(), 2000);
             });
         }
+
+        // Handle delete guest functionality (using a direct click listener on the delete link)
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function(event) {
+                // The 'onclick="return confirm(...)"' already handles the confirmation.
+                // If confirmed, the browser will navigate to the th:href URL.
+                // We'll let the standard form submission handle the actual deletion and page reload.
+                // If you want full AJAX deletion without page reload, you'd preventDefault
+                // and use fetch here. For now, assuming standard link behavior after confirmation.
+
+                // If you uncomment the preventDefault, you'd need the fetch logic below:
+                // event.preventDefault();
+                // const deleteUrl = this.href;
+                // showLoading();
+                // fetch(deleteUrl, { method: 'GET' }) // Or 'POST' if your backend expects it
+                //     .then(response => {
+                //         if (response.ok) {
+                //             return response.text();
+                //         }
+                //         throw new Error('Erro ao deletar convidado.');
+                //     })
+                //     .then(message => {
+                //         hideLoading();
+                //         M.toast({html: message, classes: 'green darken-2'});
+                //         this.closest('.collection-item').remove(); // Remove the list item from the DOM
+                //         // Logic to update totalConvidados and 'no guests' message
+                //         const totalGuestsElement = document.querySelector('p strong:contains("Total de Convidados:") + span');
+                //         if (totalGuestsElement) {
+                //             let currentTotal = parseInt(totalGuestsElement.textContent);
+                //             totalGuestsElement.textContent = currentTotal > 0 ? currentTotal - 1 : 0;
+                //         }
+                //         if (document.querySelectorAll('.collection-item').length === 0) {
+                //             document.querySelector('.collection').style.display = 'none';
+                //             document.querySelector('.no-guests').style.display = 'block';
+                //         }
+                //     })
+                //     .catch(error => {
+                //         hideLoading();
+                //         console.error('Erro:', error);
+                //         M.toast({html: error.message, classes: 'red darken-2'});
+                //     });
+            });
+        });
+
 
         // Atalhos de teclado para edição
         document.addEventListener('keydown', function(e) {
@@ -576,11 +694,12 @@
             // Verifica se o elemento focado é um dos campos de entrada de edição
             if (activeElement && activeElement.classList.contains('edit-input')) {
                 const item = activeElement.closest('.collection-item'); // Obtém o item pai do convidado
+                const eventoCodigo = [[${evento.codigo}]]; // Get event code from Thymeleaf
 
                 if (e.key === 'Enter') {
                     // Se a tecla Enter for pressionada, tenta salvar o convidado
                     const saveBtn = item.querySelector('.save-btn');
-                    if (saveBtn) saveGuest(saveBtn);
+                    if (saveBtn) saveGuest(saveBtn, eventoCodigo);
                 } else if (e.key === 'Escape') {
                     // Se a tecla Escape for pressionada, cancela a edição
                     const cancelBtn = item.querySelector('.cancel-btn');

@@ -31,13 +31,14 @@
         }
 
         /* Seção de navegação (topo) */
-        .top-navigation {
-            display: flex;
-            justify-content: space-between; /* Alinha itens nas extremidades */
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
+		.top-navigation {
+		    display: flex;
+		    justify-content: space-between; /* Alinha itens nas extremidades */
+		    align-items: center;
+		    margin-bottom: 30px;
+		    width: 195%; 
+		     margin-left: -500px; 
+		}
         /* Estilos do nome do usuário */
         .user-greeting {
             color: #b0b0b0;
@@ -62,14 +63,14 @@
         }
 
         /* Estilo para o botão de logout */
-		.btn.logout-btn { /* <-- MUDANÇA AQUI! */
-		    background-color: #f44336 !important; /* Vermelho para logout */
+		.btn.logout-btn {
+		    background: #f44336 !important; /* Vermelho para logout */
 		    margin-left: 15px; /* Espaçamento à esquerda do botão de cadastro */
 		}
-		.btn.logout-btn:hover { /* <-- MUDANÇA AQUI! */
+		.btn.logout-btn:hover {
 		    background-color: #d32f2f !important;
 		}
-        
+
         /* Card principal */
         .main-card {
             background: rgba(60, 60, 60, 0.4);
@@ -133,7 +134,7 @@
             padding: 16px 15px;
             font-size: 14px;
         }
-		.events-table colgroup col:last-child { 
+		.events-table colgroup col:last-child {
 		        min-width: 100px;
 		    }
 
@@ -213,7 +214,6 @@
             border-left: 3px solid #2196F3 !important; /* Borda azul à esquerda */
         }
 
-
         /* Overlay de Carregamento */
         .loading-overlay {
             position: fixed; /* Posição fixa para cobrir a tela inteira */
@@ -239,6 +239,53 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        /* Estilos para a barra de pesquisa */
+        .search-container {
+            margin-bottom: 20px;
+            position: relative;
+			max-width: 500px;
+			margin-left: 30px;
+        }
+
+        .search-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            color: #ffffff;
+            padding: 10px 15px 10px 45px; /* Adiciona padding para o ícone */
+            width: 110%;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #2196F3;
+            box-shadow: 0 0 8px rgba(33, 150, 243, 0.4);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-container .material-icons {
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b0b0b0;
+            font-size: 20px;
+        }
+
+        /* Estilos para o contador de eventos */
+        .event-count {
+            text-align: left;
+            margin-top: 15px;
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .event-count strong {
+            color: #ffffff;
         }
 
 
@@ -290,7 +337,7 @@
             .events-table thead th,
             .events-table tbody td {
 				padding: 15px 10px;
-		        font-size: 15px; 
+		        font-size: 15px;
 		        text-align: left;
             }
 			@media only screen and (max-width: 600px) {
@@ -357,7 +404,7 @@
                         <a href="/cadastrarEvento" class="waves-effect waves-light btn nav-btn">
                             <i class="material-icons left">add_circle_outline</i>Cadastrar Evento
                         </a>
-						<a th:href="@{/logout}" class="waves-effect waves-light btn nav-btn logout-btn" style="background-color: #f44336 !important; background: #f44336 !important;">
+						<a th:href="@{/logout}" class="waves-effect waves-light btn nav-btn logout-btn">
 						    <i class="material-icons left">exit_to_app</i>Deslogar
 						</a>
                     </div>
@@ -368,6 +415,11 @@
                 <th:block th:insert="~{mensagemValidacao}"></th:block>
 
                 <div class="section">
+                    <div class="search-container">
+                        <i class="material-icons">search</i>
+                        <input type="text" id="eventSearch" class="search-input" placeholder="Pesquisar por Eventos">
+                    </div>
+
                     <div class="events-table">
                         <table class="responsive-table">
                             <thead>
@@ -379,7 +431,7 @@
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="eventsTableBody">
                                 <tr th:each="evento : ${eventos}" th:data-codigo="${evento.codigo}">
                                     <td>
                                         <a th:href="@{/detalhesEvento/{codigo}(codigo=${evento.codigo})}" th:text="${evento.nome}" class="event-link view-mode"></a>
@@ -420,6 +472,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="event-count">
+                        Total de eventos: <strong id="totalEventsCount">0</strong>
+                    </div>
                 </div>
             </div>
         </div>
@@ -430,6 +485,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             M.AutoInit();
+            updateEventCount(); // Inicializa o contador de eventos
         });
 
         const loading = document.getElementById('loadingOverlay');
@@ -454,8 +510,6 @@
             row.querySelectorAll('.view-mode').forEach(span => {
                 const parentTd = span.closest('td');
                 if (parentTd) {
-                    // Mais robusto: mapear pelo índice da coluna ou por um atributo data-name
-                    // Para o seu HTML, podemos inferir pela ordem ou tentar o input[name] correspondente
                     if (parentTd.querySelector('input[name="nome"]')) {
                         originalValues.nome = span.textContent.trim();
                     } else if (parentTd.querySelector('input[name="local"]')) {
@@ -547,6 +601,32 @@
                     if (cancelBtn) cancelEdit(cancelBtn);
                 }
             }
+        });
+
+        // --- Novas Funções para Pesquisa e Contador ---
+
+        function updateEventCount() {
+            const visibleRows = document.querySelectorAll('#eventsTableBody tr:not([style*="display: none"])').length;
+            document.getElementById('totalEventsCount').textContent = visibleRows;
+        }
+
+        document.getElementById('eventSearch').addEventListener('keyup', function() {
+            const searchText = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#eventsTableBody tr');
+
+            rows.forEach(row => {
+                const name = row.querySelector('td:nth-child(1) .view-mode').textContent.toLowerCase();
+                const local = row.querySelector('td:nth-child(2) .view-mode').textContent.toLowerCase();
+                const data = row.querySelector('td:nth-child(3) .view-mode').textContent.toLowerCase();
+                const horario = row.querySelector('td:nth-child(4) .view-mode').textContent.toLowerCase();
+
+                if (name.includes(searchText) || local.includes(searchText) || data.includes(searchText) || horario.includes(searchText)) {
+                    row.style.display = ''; // Mostra a linha
+                } else {
+                    row.style.display = 'none'; // Oculta a linha
+                }
+            });
+            updateEventCount(); // Atualiza o contador após a filtragem
         });
     </script>
 </body>

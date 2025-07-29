@@ -11,7 +11,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 /* Fundo escuro elegante */
 body {
     background-color: #212121; 
-
     background-attachment: fixed; 
     min-height: 100vh;
     color: #e0e0e0; 
@@ -79,14 +78,16 @@ h1 {
 /* Campos de input */
 .input-field input[type=text]:focus,
 .input-field input[type=date]:focus,
-.input-field input[type=time]:focus {
+.input-field input[type=time]:focus,
+.input-field textarea.materialize-textarea:focus {
     border-bottom: 2px solid #2196F3 !important;
     box-shadow: 0 1px 0 0 #2196F3 !important;
 }
 
 .input-field input[type=text],
 .input-field input[type=date],
-.input-field input[type=time] {
+.input-field input[type=time],
+.input-field textarea.materialize-textarea {
     color: #ffffff !important;
     border-bottom: 1px solid rgba(255,255,255,0.3) !important;
 }
@@ -102,9 +103,17 @@ h1 {
 /* Inputs quando válidos */
 .input-field input[type=text].valid,
 .input-field input[type=date].valid,
-.input-field input[type=time].valid {
+.input-field input[type=time].valid,
+.input-field textarea.materialize-textarea.valid {
     border-bottom: 2px solid #4CAF50 !important;
     box-shadow: 0 1px 0 0 #4CAF50 !important;
+}
+
+/* Textarea específico */
+.input-field textarea.materialize-textarea {
+    min-height: 30px;
+    padding: 8px 0;
+    resize: vertical;
 }
 
 /* Botão de salvar */
@@ -172,14 +181,17 @@ h1 {
 }
 
 /* Placeholders personalizados */
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: rgba(255,255,255,0.5) !important;
 }
 
 /* Efeito hover nos campos */
-.input-field:hover input {
+.input-field:hover input,
+.input-field:hover textarea {
     border-bottom: 1px solid rgba(255,255,255,0.5) !important;
 }
+
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
@@ -239,6 +251,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 </div>
 
 <div class="row">
+<div class="input-field col s12">
+<textarea id="descricao" name="descricao" class="materialize-textarea" placeholder="Descreva seu evento (opcional)"></textarea>
+<label for="descricao">Descrição do Evento</label>
+</div>
+</div>
+
+<div class="row">
 <div class="col s12 center-align">
 <button class="btn waves-effect waves-light save-btn" type="submit">
 <i class="material-icons left">save</i>Salvar Evento
@@ -259,9 +278,10 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     M.updateTextFields();
+    M.textareaAutoResize(document.getElementById('descricao'));
     
     // Animação suave nos inputs
-    const inputs = document.querySelectorAll('input');
+    const inputs = document.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         input.addEventListener('focus', function() {
             this.parentElement.style.transform = 'scale(1.02)';
