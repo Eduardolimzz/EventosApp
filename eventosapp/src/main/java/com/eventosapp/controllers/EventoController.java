@@ -305,4 +305,35 @@ public class EventoController {
             return "error: " + e.getMessage();
         }
     }
-}
+
+	@RequestMapping(value = "/editarDescricaoEvento", method = RequestMethod.POST)
+	@ResponseBody
+	public String editarDescricaoEvento(@RequestBody Map<String, String> dadosEvento, 
+	                                   HttpSession session) {
+	    try {
+	        Usuario usuarioLogado = verificarUsuarioLogado(session);
+	        if (usuarioLogado == null) {
+	            return "not_logged_in";
+	        }
+	        
+	        long codigo = Long.parseLong(dadosEvento.get("codigo"));
+	        String novaDescricao = dadosEvento.get("descricao");
+	
+	        Optional<Evento> eventoOptional = er.findByCodigoAndUsuario(codigo, usuarioLogado);
+	
+	        if (eventoOptional.isPresent()) {
+	            Evento eventoExistente = eventoOptional.get();
+	            eventoExistente.setDescricao(novaDescricao);
+	            er.save(eventoExistente);
+	            return "success";
+	        } else {
+	            return "not_found_or_no_permission";
+	        }
+	    } catch (NumberFormatException e) {
+	        return "error: Invalid Code";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "error: " + e.getMessage();
+	    }
+	}
+   }

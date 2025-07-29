@@ -131,21 +131,58 @@
             justify-content: center;
             gap: 10px;
         }
-        .description-content {
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: -2px -5px;
-            color: #e0e0e0;
-            font-size: 16px;
-            line-height: 1.6;
-			min-height: 30px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
+        
         .no-description {
             color: rgba(255,255,255,0.5);
             font-style: italic;
             text-align: center;
+        }
+
+        /* Estilos para descrição editável */
+        .description-editable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .description-editable:hover {
+            background: rgba(255,255,255,0.08);
+        }
+        .description-editing {
+            background: rgba(33, 150, 243, 0.1) !important;
+            border: 2px solid #2196F3 !important;
+        }
+
+        .description-edit-area {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #2196F3;
+            border-radius: 8px;
+            padding: 15px;
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 1.6;
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+        .description-edit-area:focus {
+            outline: none;
+            border-color: #64B5F6;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
+        }
+
+        .description-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .description-hint {
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
         }
 
         /* Cards de Seção (Adicionar Convidado, Lista de Convidados) */
@@ -400,19 +437,32 @@
                     </div>
                 </div>
 
-                <div class="section" th:if="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}">
+                <!-- Seção da Descrição Editável -->
+                <div class="section">
                     <div class="card description-card">
                         <h5><i class="material-icons">description</i>Descrição do Evento</h5>
-                        <div class="description-content">
-                            <p th:text="${evento.descricao}"></p>
+                        
+                        <!-- Modo de Visualização da Descrição -->
+                        <div class="description-content description-editable view-mode" id="descriptionView" onclick="editDescription()">
+                            <p th:if="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}" th:text="${evento.descricao}"></p>
+                            <p th:unless="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}" class="no-description">Clique aqui para adicionar uma descrição ao evento</p>
                         </div>
-                    </div>
-                </div>
-                <div class="section" th:unless="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}">
-                    <div class="card description-card">
-                        <h5><i class="material-icons">description</i>Descrição do Evento</h5>
-                        <div class="description-content no-description">
-                            <p>Nenhuma descrição para este evento.</p>
+                        
+                        <!-- Modo de Edição da Descrição -->
+                        <div class="edit-mode" id="descriptionEdit" style="display: none;">
+                            <textarea class="description-edit-area" id="descriptionTextarea" placeholder="Digite a descrição do evento..."></textarea>
+                            <div class="description-actions">
+                                <button class="btn action-btn save-btn waves-effect waves-light" onclick="saveDescription()">
+                                    <i class="material-icons">save</i>
+                                </button>
+                                <button class="btn action-btn cancel-btn waves-effect waves-light" onclick="cancelDescriptionEdit()">
+                                    <i class="material-icons">cancel</i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="description-hint view-mode">
+                            Clique na descrição para editá-la
                         </div>
                     </div>
                 </div>
@@ -513,6 +563,118 @@
          * @description Oculta o overlay de carregamento.
          */
         const hideLoading = () => loading.style.display = 'none';
+
+        // Variáveis para controle da descrição
+        let originalDescription = '';
+        const eventoCodigo = [[${evento.codigo}]]; // Obtém o código do evento via Thymeleaf
+
+        /**
+         * @function editDescription
+         * @description Ativa o modo de edição da descrição do evento
+         */
+        function editDescription() {
+            const viewMode = document.getElementById('descriptionView');
+            const editMode = document.getElementById('descriptionEdit');
+            const textarea = document.getElementById('descriptionTextarea');
+            const hints = document.querySelectorAll('.description-hint');
+
+            // Armazena o conteúdo original
+            const descriptionText = viewMode.querySelector('p');
+            if (descriptionText && !descriptionText.classList.contains('no-description')) {
+                originalDescription = descriptionText.textContent.trim();
+            } else {
+                originalDescription = '';
+            }
+
+            // Preenche o textarea com o conteúdo atual
+            textarea.value = originalDescription;
+
+            // Alterna entre os modos
+            viewMode.style.display = 'none';
+            editMode.style.display = 'block';
+            hints.forEach(hint => hint.style.display = 'none');
+
+            // Foca no textarea
+            textarea.focus();
+        }
+
+        /**
+         * @function cancelDescriptionEdit
+         * @description Cancela a edição da descrição e volta ao modo de visualização
+         */
+        function cancelDescriptionEdit() {
+            const viewMode = document.getElementById('descriptionView');
+            const editMode = document.getElementById('descriptionEdit');
+            const hints = document.querySelectorAll('.description-hint');
+
+            // Volta ao modo de visualização
+            viewMode.style.display = 'block';
+            editMode.style.display = 'none';
+            hints.forEach(hint => hint.style.display = 'block');
+        }
+
+        /**
+         * @function saveDescription
+         * @description Salva a descrição editada no servidor
+         */
+        function saveDescription() {
+            const textarea = document.getElementById('descriptionTextarea');
+            const newDescription = textarea.value.trim();
+
+            showLoading();
+
+            const data = {
+                codigo: eventoCodigo,
+                descricao: newDescription
+            };
+
+            fetch('/editarDescricaoEvento', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(result => {
+                hideLoading();
+                const cleanResult = result.trim();
+
+                if (cleanResult === 'success') {
+                    M.toast({html: 'Descrição atualizada com sucesso!', classes: 'green darken-2'});
+                    
+                    // Atualiza o conteúdo da visualização
+                    const viewMode = document.getElementById('descriptionView');
+                    const descriptionP = viewMode.querySelector('p');
+                    
+                    if (newDescription) {
+                        if (descriptionP) {
+                            descriptionP.textContent = newDescription;
+                            descriptionP.classList.remove('no-description');
+                        } else {
+                            viewMode.innerHTML = `<p>${newDescription}</p>`;
+                        }
+                    } else {
+                        if (descriptionP) {
+                            descriptionP.textContent = 'Clique aqui para adicionar uma descrição ao evento';
+                            descriptionP.classList.add('no-description');
+                        } else {
+                            viewMode.innerHTML = '<p class="no-description">Clique aqui para adicionar uma descrição ao evento</p>';
+                        }
+                    }
+
+                    // Volta ao modo de visualização
+                    cancelDescriptionEdit();
+                } else {
+                    M.toast({html: 'Erro ao salvar descrição. Tente novamente.', classes: 'red'});
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                console.error('Erro ao salvar descrição:', error);
+                M.toast({html: 'Erro de comunicação. Tente novamente.', classes: 'red'});
+            });
+        }
 
         /**
          * @function editGuest
@@ -687,14 +849,13 @@
             });
         });
 
-
         // Atalhos de teclado para edição
         document.addEventListener('keydown', function(e) {
             const activeElement = document.activeElement; // Obtém o elemento atualmente focado
+            
             // Verifica se o elemento focado é um dos campos de entrada de edição
             if (activeElement && activeElement.classList.contains('edit-input')) {
                 const item = activeElement.closest('.collection-item'); // Obtém o item pai do convidado
-                const eventoCodigo = [[${evento.codigo}]]; // Get event code from Thymeleaf
 
                 if (e.key === 'Enter') {
                     // Se a tecla Enter for pressionada, tenta salvar o convidado
@@ -704,6 +865,19 @@
                     // Se a tecla Escape for pressionada, cancela a edição
                     const cancelBtn = item.querySelector('.cancel-btn');
                     if (cancelBtn) cancelEdit(cancelBtn);
+                }
+            }
+            
+            // Atalhos de teclado para edição da descrição
+            if (activeElement && activeElement.id === 'descriptionTextarea') {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    // Ctrl + Enter para salvar a descrição
+                    e.preventDefault();
+                    saveDescription();
+                } else if (e.key === 'Escape') {
+                    // Escape para cancelar edição da descrição
+                    e.preventDefault();
+                    cancelDescriptionEdit();
                 }
             }
         });
