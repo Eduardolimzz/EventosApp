@@ -1,0 +1,254 @@
+[33mcommit ab5fa0b81529241091c3f46a5fa75f91ac72a584[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Thu Jul 31 22:16:38 2025 -0300
+
+    Ajuste de edição de convidado que parou de funcionar com railway
+
+[33mcommit f3ec150c28857842f835917778f2e6ec9df7b636[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 19:18:29 2025 -0300
+
+    Ultimo teste
+
+[33mcommit 9ea8b6ff4f847a0df5ffe87f8c188a0b7b30f5d2[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 19:11:35 2025 -0300
+
+    Primeiro teste de conexão
+
+[33mcommit d117fb8e5f6ecfab348f4a492ffb203f7bf19c17[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 19:05:21 2025 -0300
+
+    Adaptando banco ao railway
+
+[33mcommit da095ae583b94a3590c8dd86dce63f636c816739[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 18:43:52 2025 -0300
+
+    Ultimo teste de conectividade
+
+[33mcommit 3f75dd525efa5f449c2c4f3e25699231239f834c[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 18:41:22 2025 -0300
+
+    Teste de variavel
+
+[33mcommit 52cb02aa08a4acc2fd88e2b9f83ddb8e75f72e70[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 18:37:58 2025 -0300
+
+    Testando hardcored
+
+[33mcommit f6d0e66e417e6f821389ca293941fb95a4165f0a[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 18:33:41 2025 -0300
+
+    Atualizando configurações para teste de railway
+
+[33mcommit 7f1fd8824d6611a041adafaa3a6dfe0c4a5b6792[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 15:09:00 2025 -0300
+
+    Update application.properties
+
+[33mcommit ff0a4d23b6ac9f33450aedfed65a1d1ddf629fea[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 14:59:46 2025 -0300
+
+    Update Usuario.java
+
+[33mcommit 937e3aecd83043befd8267f2704dc69e442434fe[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 14:59:12 2025 -0300
+
+    atualizando usuario repository para teste de banco
+
+[33mcommit 8aacbd9b02a9131fbe1fbcd3592f6cb81c083aa7[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 14:46:05 2025 -0300
+
+    Update application.properties
+
+[33mcommit 39f245699549c66f7e7d4fcba0dde28adf300d00[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 14:08:44 2025 -0300
+
+    Update application.properties
+
+[33mcommit adb3c793241acdad63143dda5893dcb0f0cf6e50[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 14:01:03 2025 -0300
+
+    Update application.properties
+
+[33mcommit 20d401c28f070844894c7643ff10a2436ee074da[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 13:54:17 2025 -0300
+
+    Update application.properties
+
+[33mcommit 4c4bcf53679a12e5f419c1f0726e90cc4bccd60d[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 13:45:50 2025 -0300
+
+    Update application.properties
+
+[33mcommit 0e2cfe7e425bacc6acc34b12a3a66c3ec9d091ad[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 13:44:03 2025 -0300
+
+    Update application.properties
+
+[33mcommit 1626cc7088a46d0784a2b4a3169211392116a978[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 13:40:21 2025 -0300
+
+    Update application.properties
+
+[33mcommit abe33f7f4a045b5e54f3bb77d0cd98a0aab2c4fa[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 10:02:45 2025 -0300
+
+    Revertendo testes
+
+[33mcommit 28d6780fb12bb3687b123d323ebeb6c003ef061b[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 09:59:53 2025 -0300
+
+    Ajuste de propriedades
+
+[33mcommit 1e7f3f9147599d0fd5e495e8708fec6b0a53c978[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 09:53:33 2025 -0300
+
+    Ajuste de propriedades para teste no banco
+
+[33mcommit 1c4b72afc42564d5992ba124ad039ea56a55ec02[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Wed Jul 30 09:43:23 2025 -0300
+
+    Retorna para credenciais ROOT injetadas pelo Railway e ddl-auto=none
+
+[33mcommit 05dca2f708b31a5b02cdd18c1d03b5765922b583[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 00:13:15 2025 -0300
+
+    Retirando debug de teste
+
+[33mcommit 669d14c971e65cee1d8d703b1eaf8c83b7d64f46[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 00:11:48 2025 -0300
+
+    Debug para teste em produção
+
+[33mcommit 515b5533ee459a6f5e72d2c9314b956023a318c4[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Wed Jul 30 00:07:09 2025 -0300
+
+    Update application.properties
+
+[33mcommit 6c89210c534d383b637902d1ac555531fd5daba0[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Tue Jul 29 23:55:54 2025 -0300
+
+    Update application.properties
+
+[33mcommit a9a39dc7f491bd232070cbacf7597326c2b3a975[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 23:37:53 2025 -0300
+
+    Tentativa de aplicar railway
+
+[33mcommit c1a4dca1645e5a2fb909a3615d9530b7797ca20e[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 22:40:52 2025 -0300
+
+    Adicionando Appuser para resolver problema de usuario
+
+[33mcommit 0f14cce512786904bdbcfb9a36209d1bc1a0f61b[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 19:46:30 2025 -0300
+
+    Testando log
+
+[33mcommit d7543ce627f21d6e0ed2a56eacc7ef719a759222[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 19:43:11 2025 -0300
+
+    Teste do railway
+
+[33mcommit 007dd61b1f840c9ccae5f5ebf4ada19845c5ea2a[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 19:36:48 2025 -0300
+
+    ultimo testee railway
+
+[33mcommit 57b9c40070a50329874c56453c08ffe262410d60[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 19:32:58 2025 -0300
+
+    Teste para deploy
+
+[33mcommit a2bf77ec710286838ffd891b03fa3c7db3911b1b[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 19:21:41 2025 -0300
+
+    Adaptando banco de dados
+
+[33mcommit 5a61fca5a072697ad29d2f98459f96a6516d0afc[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 19:11:36 2025 -0300
+
+    Testeando senha para banco
+
+[33mcommit 4997fe1153a1dc6009dd06e491c01a54aabb739b[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Tue Jul 29 14:49:15 2025 -0300
+
+    Update application.properties
+
+[33mcommit b365d8c985145c5559358437f99d54f60682d4b3[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Tue Jul 29 14:43:27 2025 -0300
+
+    Update application.properties
+
+[33mcommit 2f471d6abffa1ce93a41dad7accf49365f932240[m
+Author: Eduardo Lima <161326065+Eduardolimzz@users.noreply.github.com>
+Date:   Tue Jul 29 13:24:32 2025 -0300
+
+    Update DataConfiguration.java
+
+[33mcommit a0080e36898be550829e208322b2c5433f62d2b6[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 10:37:36 2025 -0300
+
+    Corrigindo erro de conexão com banco de dados
+
+[33mcommit b89512eb59ab600e80cae6f0c78addc25c2c5179[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 10:29:16 2025 -0300
+
+    Teste para banco de dados
+
+[33mcommit b70cfe9eb412f471b93fd6689ea8c07b6271b895[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 10:06:20 2025 -0300
+
+    Teste para deploy
+
+[33mcommit b594772008c3be869d2cc21838a2913252c50d22[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Tue Jul 29 09:53:39 2025 -0300
+
+    Arrumando bugs e deixando descrição editavel
+
+[33mcommit ce261408749f0a53ab36b3d920b4f831dbaeae1f[m
+Author: Eduardo Lima <eduardoaluno1800@gmail.com>
+Date:   Mon Jul 28 23:15:50 2025 -0300
+
+    Adicionando atualizações da landing page e de descrição de eventos
+
+[33mcommit 7681a7e7407d34c25c648e43a454ff2808a99059[m
+Author: Edua
