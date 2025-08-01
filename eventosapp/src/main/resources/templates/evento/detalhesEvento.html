@@ -514,13 +514,13 @@
                                             <a class="btn action-btn edit-btn waves-effect waves-light" onclick="editGuest(this)">
                                                 <i class="material-icons">edit</i>
                                             </a>
-                                            <a th:href="@{'/deletarConvidado/' + ${convidado.rg} + '/' + ${evento.codigo}}"
+                                            <a th:href="@{'/deletarConvidado/' + ${convidado.rg}}"
                                                class="btn action-btn delete-btn waves-effect waves-light" onclick="return confirm('Tem certeza que deseja excluir este convidado?');">
                                                 <i class="material-icons">delete</i>
                                             </a>
                                         </div>
                                         <div class="edit-mode">
-                                            <a class="btn action-btn save-btn waves-effect waves-light" onclick="saveGuest(this, [[${evento.codigo}]])">
+                                            <a class="btn action-btn save-btn waves-effect waves-light" th:onclick="'saveGuest(this, ' + ${evento.codigo} + ')'">
                                                 <i class="material-icons">save</i>
                                             </a>
                                             <a class="btn action-btn cancel-btn waves-effect waves-light" onclick="cancelEdit(this)">
@@ -702,30 +702,33 @@
          * Ele oculta elementos do modo de edição, mostra elementos do modo de visualização, remove
          * a classe 'editing' e restaura os valores originais nos campos de entrada.
          */
-        function cancelEdit(btn) {
-            const item = btn.closest('.collection-item');
-            // Mostra todos os elementos com a classe 'view-mode' dentro do item
-            item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'inline');
-            // Oculta todos os elementos com a classe 'edit-mode' dentro do item
-            item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
-            // Remove a classe 'editing' do item
-            item.classList.remove('editing');
+		 function cancelEdit(btn) {
+		     const item = btn.closest('.collection-item');
+		     // Mostra todos os elementos com a classe 'view-mode' dentro do item
+		     item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'inline');
+		     // Oculta todos os elementos com a classe 'edit-mode' dentro do item
+		     item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+		     // Remove a classe 'editing' do item
+		     item.classList.remove('editing');
 
-            // Restaura os valores originais nos campos de entrada
-            const nameInput = item.querySelector('input[name="nomeConvidado"]');
-            const rgInput = item.querySelector('input[name="rg"]');
-            
-            // Assuming the structure: <strong>Nome:</strong> <span class="view-mode">...</span>
-            // and <strong>Número:</strong> <span class="view-mode">...</span>
-            const originalNameSpan = item.querySelector('.view-mode[th:text*="convidado.nomeConvidado"]');
-            const originalRgSpan = item.querySelector('.view-mode[th:text*="convidado.rg"]');
+		     // Restaura os valores originais nos campos de entrada
+		     const nameInput = item.querySelector('input[name="nomeConvidado"]');
+		     const rgInput = item.querySelector('input[name="rg"]');
+		     
+		     // Busca os spans corretos usando uma abordagem mais direta
+		     const nameSpan = item.querySelector('.col:nth-child(1) .view-mode');
+		     const rgSpan = item.querySelector('.col:nth-child(2) .view-mode');
 
-            if (nameInput && originalNameSpan) nameInput.value = originalNameSpan.textContent.trim();
-            if (rgInput && originalRgSpan) rgInput.value = originalRgSpan.textContent.trim();
-            
-            // Re-activate Materialize labels for correct display after value reset
-            M.updateTextFields();
-        }
+		     if (nameInput && nameSpan) {
+		         nameInput.value = nameSpan.textContent.trim();
+		     }
+		     if (rgInput && rgSpan) {
+		         rgInput.value = rgSpan.textContent.trim();
+		     }
+		     
+		     // Re-activate Materialize labels for correct display after value reset
+		     M.updateTextFields();
+		 }
 
         /**
          * @function saveGuest
@@ -758,12 +761,11 @@
 
             showLoading(); // Mostra o indicador de carregamento
 
-            const data = {
-                oldRg: originalRg, // Send original RG to identify the guest
-                newRg: newRg,      // Send new RG
-                nomeConvidado: newName,
-                eventoCodigo: eventoCodigo // Send event code
-            };
+			const data = {
+			    rg: originalRg,        // RG original (nome do parâmetro que seu controller espera)
+			    novoRg: newRg,         // Novo RG (nome do parâmetro que seu controller espera)
+			    nomeConvidado: newName // Nome do convidado
+			};
 
             fetch('/editarConvidado', {
                 method: 'POST',
@@ -778,8 +780,10 @@
                 if (cleanResult === 'success') {
                     M.toast({html: 'Convidado atualizado com sucesso!', classes: 'green darken-2'});
                     // Update the view-mode spans with new values
-                    item.querySelector('.view-mode[th:text*="convidado.nomeConvidado"]').textContent = newName;
-                    item.querySelector('.view-mode[th:text*="convidado.rg"]').textContent = newRg;
+					const nameSpan = item.querySelector('.col:nth-child(1) .view-mode');
+					const rgSpan = item.querySelector('.col:nth-child(2) .view-mode');
+					if (nameSpan) nameSpan.textContent = newName;
+					if (rgSpan) rgSpan.textContent = newRg;
                     item.dataset.rg = newRg; // Update the data-rg attribute for future edits
 
                     // Revert to view mode
