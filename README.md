@@ -12,7 +12,7 @@
   <h3>🚀 Gestão Profissional de Eventos</h3>
   <p>Plataforma completa para organizar eventos e gerenciar convidados com eficiência, controle total e design moderno</p>
   
-  <a href="https://javaspringboot-production-af1a.up.railway.app">🌐 Ver Demo ao Vivo</a>
+  <a href="https://javaspringboot-production-a11a.up.railway.app/">🌐 Clique e veja!</a>
 </div>
 
 ---
