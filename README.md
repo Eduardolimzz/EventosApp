@@ -9,7 +9,7 @@
 </div>
 
 <div align="center">
-  <h3>🚀 Gestão Profissional de Eventos</h3>
+  <h3>Gestão Profissional de Eventos</h3>
   <p>Plataforma completa para organizar eventos e gerenciar convidados com eficiência, controle total e design moderno</p>
   
   <a href="https://javaspringboot-production-a11a.up.railway.app/">🌐 Clique e veja!</a>
@@ -197,14 +197,6 @@ PORT=8080
 SPRING_PROFILES_ACTIVE=prod
 ```
 
-### Docker (Opcional)
-```dockerfile
-FROM openjdk:17-jdk-slim
-COPY target/eventosapp-*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-```
-
 ---
 
 ## 🚀 Deploy
@@ -245,12 +237,6 @@ Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_B
 - [ ] API REST completa
 - [ ] Integração com calendários
 - [ ] Sistema de templates de eventos
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
