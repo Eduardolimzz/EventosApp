@@ -17,19 +17,19 @@
 
 ---
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 O **EventosApp** é um sistema web completo desenvolvido com **Java 17** e **Spring Boot** que permite o gerenciamento profissional de eventos. A aplicação oferece uma interface moderna e intuitiva para criar eventos, gerenciar convidados e acompanhar confirmações de presença em tempo real.
 
 ###  Principais Funcionalidades
 
-- 🎪 **Gestão Completa de Eventos** - Criar, editar e excluir eventos
-- 👥 **Gerenciamento de Convidados** - Adicionar e controlar lista de convidados  
-- 🔗 **Links Públicos** - Confirmação de presença via link compartilhável
-- 📊 **Dashboard Administrativo** - Acompanhar confirmações e estatísticas
-- 🔐 **Sistema de Autenticação** - Login seguro com controle de sessão
-- ✅ **Validação de Dados** - Validação robusta em frontend e backend
-- 📱 **Design Responsivo** - Interface moderna que funciona em todos os dispositivos
+-  **Gestão Completa de Eventos** - Criar, editar e excluir eventos
+-  **Gerenciamento de Convidados** - Adicionar e controlar lista de convidados  
+-  **Links Públicos** - Confirmação de presença via link compartilhável
+-  **Dashboard Administrativo** - Acompanhar confirmações e estatísticas
+-  **Sistema de Autenticação** - Login seguro com controle de sessão
+-  **Validação de Dados** - Validação robusta em frontend e backend
+-  **Design Responsivo** - Interface moderna que funciona em todos os dispositivos
 
 ---
 
@@ -271,5 +271,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 <div align="center">
   <p>⭐ Se este projeto te ajudou, considere dar uma estrela!</p>
-  <p>🚀 <a href="https://javaspringboot-production-af1a.up.railway.app">Acesse a aplicação em produção</a></p>
 </div>
