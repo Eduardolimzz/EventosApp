@@ -8,41 +8,38 @@
     <style>
         /* Estilos Gerais do Corpo */
         body {
-            background: #212121; /* Fundo escuro */
-            color: #e0e0e0; /* Cor de texto clara */
-            font-family: 'Roboto', sans-serif; /* Fonte moderna */
-            min-height: 100vh; /* Altura total da viewport */
+            background: #212121;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
         }
-        /* Contêiner para o conteúdo principal */
+        
         .container {
             margin-top: 20px;
         }
-        /* Título da Página */
+        
         h1 {
             color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra sutil para profundidade */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             margin: -30px 0 30px 0;
             font-weight: 300;
         }
-
         /* Seção de Navegação */
         .nav-section {
             margin-bottom: 30px;
             padding-top: 10px;
             text-align: left;
-            margin-left: -280px; /* Ajustar conforme necessário, pode ser específico para seu layout */
         }
-        /* Botões de Navegação */
+        
         .nav-btn {
-            background: linear-gradient(45deg, #2196F3, #1976D2) !important; /* Gradiente azul */
+            background: linear-gradient(45deg, #2196F3, #1976D2) !important;
             border-radius: 8px;
             margin: 5px;
-            transition: all 0.3s ease; /* Transição suave para efeitos de hover */
+            transition: all 0.3s ease;
         }
         .nav-btn:hover {
-            transform: translateY(-2px); /* Leve levantamento ao passar o mouse */
+            transform: translateY(-2px);
         }
-
         /* Card Principal de Detalhes do Evento */
         .main-card {
             background: transparent;
@@ -53,26 +50,18 @@
         .card-content {
             padding: 30px !important;
         }
-        .card-title {
-            color: #ffffff !important;
-            font-size: 28px !important;
-            font-weight: bold !important;
-            margin-bottom: 30px !important;
-            text-align: center;
-        }
-
         /* Seção de Informações do Evento */
         .event-info .row {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            gap: 15px; /* Espaçamento entre os itens do evento */
+            gap: 15px;
             margin-bottom: 0;
         }
-        /* Item Individual do Evento (ex: Nome, Local) */
+        
         .event-item {
-            background: rgba(30, 30, 30, 0.6); /* Fundo escuro semi-transparente */
-            backdrop-filter: blur(10px); /* Efeito de desfoque para um visual moderno */
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(10px);
             border-radius: 12px;
             padding: 15px 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -82,7 +71,7 @@
             text-align: center;
             transition: all 0.3s ease;
             flex-grow: 1;
-            flex-basis: calc(25% - 15px); /* Quatro itens por linha em telas maiores */
+            flex-basis: calc(25% - 15px);
             min-width: 150px;
             max-width: 24%;
         }
@@ -97,7 +86,7 @@
             color: #e0e0e0;
         }
         .event-item strong {
-            color: #64B5F6; /* Azul claro para rótulos */
+            color: #64B5F6;
             font-weight: 600;
             display: block;
             margin-bottom: 3px;
@@ -106,10 +95,9 @@
         }
         .info-icon {
             font-size: 40px !important;
-            color: #2196F3; /* Cor do ícone azul */
+            color: #2196F3;
             margin-bottom: 8px;
         }
-
         /* Card de Descrição do Evento */
         .description-card {
             background: rgba(60, 60, 60, 0.4);
@@ -137,20 +125,15 @@
             font-style: italic;
             text-align: center;
         }
-
-        /* Estilos para descrição editável */
         .description-editable {
             cursor: pointer;
             transition: all 0.3s ease;
+            padding: 15px;
+            border-radius: 8px;
         }
         .description-editable:hover {
             background: rgba(255,255,255,0.08);
         }
-        .description-editing {
-            background: rgba(33, 150, 243, 0.1) !important;
-            border: 2px solid #2196F3 !important;
-        }
-
         .description-edit-area {
             width: 100%;
             background: rgba(255,255,255,0.1);
@@ -169,14 +152,12 @@
             border-color: #64B5F6;
             box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
         }
-
         .description-actions {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 15px;
         }
-
         .description-hint {
             color: rgba(255,255,255,0.4);
             font-size: 14px;
@@ -184,10 +165,9 @@
             margin-top: 10px;
             font-style: italic;
         }
-
-        /* Cards de Seção (Adicionar Convidado, Lista de Convidados) */
+        /* Cards de Seção */
         .section-card {
-            background: rgba(60, 60, 60, 0.4); /* Fundo semi-transparente mais escuro */
+            background: rgba(60, 60, 60, 0.4);
             backdrop-filter: blur(15px);
             border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.15);
@@ -202,26 +182,23 @@
             padding: 25px 25px 0 25px;
             text-align: center;
         }
-
         /* Estilo dos Campos de Entrada */
         .input-field input[type=text] {
             color: #ffffff !important;
             border-bottom: 1px solid rgba(255,255,255,0.3) !important;
         }
         .input-field input[type=text]:focus {
-            border-bottom: 2px solid #2196F3 !important; /* Sublinhado azul ao focar */
+            border-bottom: 2px solid #2196F3 !important;
             box-shadow: 0 1px 0 0 #2196F3 !important;
         }
         .input-field label {
             color: rgba(255,255,255,0.7) !important;
         }
         .input-field label.active {
-            color: #2196F3 !important; /* Rótulo azul quando ativo/focado */
+            color: #2196F3 !important;
         }
-
-        /* Botão Adicionar Convidado */
         .add-btn {
-            background: linear-gradient(45deg, #4CAF50, #388E3C) !important; /* Gradiente verde */
+            background: linear-gradient(45deg, #4CAF50, #388E3C) !important;
             border-radius: 8px;
             margin-top: 15px;
             transition: all 0.3s ease;
@@ -229,70 +206,63 @@
         .add-btn:hover {
             transform: translateY(-2px);
         }
-
-        /* Estilo da Coleção (Lista de Convidados) */
-        .collection {
-            border: none !important;
-            background: transparent;
+        /* Estilo da Lista de Convidados */
+        .guests-list {
+            padding: 0;
             margin: 0;
         }
-        .collection-item {
-            background: rgba(255,255,255,0.03) !important; /* Branco transparente muito sutil */
-            border-bottom: 1px solid rgba(255,255,255,0.08) !important;
-            color: #e0e0e0 !important;
+        .guest-item {
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 20px 25px;
             transition: all 0.3s ease;
-            padding: 20px 25px !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        .collection-item:hover {
-            background: rgba(255,255,255,0.08) !important;
+        .guest-item:hover {
+            background: rgba(255,255,255,0.08);
         }
-        .collection-item:last-child {
-            border-bottom: none !important;
+        .guest-item:last-child {
+            border-bottom: none;
         }
-        .collection-item strong {
+        .guest-item.editing {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 3px solid #2196F3;
+        }
+        .guest-info {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+		.guest-field {
+		    display: flex;
+		    flex-direction: row; /* coloca lado a lado */
+		    align-items: center; /* alinha verticalmente */
+		    gap: 5px; /* espaço entre o título e o valor */
+		    min-width: 120px;
+		}
+        .guest-field strong {
             color: #64B5F6;
             font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 0;
         }
-        .collection-item.editing {
-            background: rgba(33, 150, 243, 0.1) !important; /* Fundo azul claro ao editar */
-            border-left: 3px solid #2196F3 !important; /* Borda azul à esquerda */
+        .guest-field span,
+        .guest-field input {
+            color: #e0e0e0;
+            font-size: 16px;
         }
-
-        /* Botões de Ação (Editar, Excluir, Salvar, Cancelar) */
-        .action-btn {
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            height: 36px !important;
-            width: 36px !important;
-            min-width: 36px !important;
-            padding: 0 !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            margin-right: 8px !important;
-        }
-        .action-btn:hover {
-            transform: translateY(-1px);
-        }
-        .action-btn i {
-            font-size: 18px !important;
-            margin: 0 !important;
-        }
-        .edit-btn { background: rgba(255, 193, 7, 0.8) !important; } /* Âmbar */
-        .edit-btn:hover { background: rgba(255, 193, 7, 1) !important; }
-        .delete-btn { background: rgba(244, 67, 54, 0.8) !important; } /* Vermelho */
-        .delete-btn:hover { background: rgba(244, 67, 54, 1) !important; }
-        .save-btn { background: rgba(76, 175, 80, 0.8) !important; } /* Verde */
-        .save-btn:hover { background: rgba(76, 175, 80, 1) !important; }
-        .cancel-btn { background: rgba(158, 158, 158, 0.8) !important; } /* Cinza */
-        .cancel-btn:hover { background: rgba(158, 158, 158, 1) !important; }
-
-        /* Campo de Entrada para Edição de Convidados */
         .edit-input {
             background: rgba(255,255,255,0.1) !important;
             border: 1px solid #2196F3 !important;
             border-radius: 4px !important;
-            padding: 4px 8px !important;
+            padding: 8px !important;
             color: #ffffff !important;
             font-size: 14px !important;
             width: 100% !important;
@@ -303,8 +273,90 @@
             border-color: #64B5F6 !important;
             box-shadow: 0 0 5px rgba(33, 150, 243, 0.5) !important;
         }
-
-        /* Estilo para quando não há convidados */
+        .guest-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        /* Status Badge */
+        .status-badge {
+            border-radius: 12px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 15px;
+        }
+        .status-badge.green { 
+            background: rgba(76, 175, 80, 0.2); 
+            color: #4CAF50; 
+            border: 1px solid rgba(76, 175, 80, 0.3); 
+        }
+        .status-badge.red { 
+            background: rgba(244, 67, 54, 0.2); 
+            color: #F44336; 
+            border: 1px solid rgba(244, 67, 54, 0.3); 
+        }
+        .status-badge.orange { 
+            background: rgba(255, 152, 0, 0.2); 
+            color: #FF9800; 
+            border: 1px solid rgba(255, 152, 0, 0.3); 
+        }
+        /* Botões de Ação */
+        .action-btn {
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            height: 36px !important;
+            width: 36px !important;
+            min-width: 36px !important;
+            padding: 0 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin: 0 4px !important;
+        }
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+        .action-btn i {
+            font-size: 18px !important;
+            margin: 0 !important;
+        }
+        /* Botões de Status */
+        .status-btn {
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            height: 36px !important;
+            width: 36px !important;
+            min-width: 36px !important;
+            padding: 0 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin: 0 4px !important;
+        }
+        .status-btn:hover {
+            transform: translateY(-1px);
+        }
+        .status-btn i {
+            font-size: 18px !important;
+            margin: 0 !important;
+        }
+        .status-confirmado { background: rgba(76, 175, 80, 0.8) !important; }
+        .status-confirmado:hover { background: rgba(76, 175, 80, 1) !important; }
+        .status-ausente { background: rgba(244, 67, 54, 0.8) !important; }
+        .status-ausente:hover { background: rgba(244, 67, 54, 1) !important; }
+        .status-pendente { background: rgba(255, 152, 0, 0.8) !important; }
+        .status-pendente:hover { background: rgba(255, 152, 0, 1) !important; }
+        .edit-btn { background: rgba(255, 193, 7, 0.8) !important; }
+        .edit-btn:hover { background: rgba(255, 193, 7, 1) !important; }
+        .delete-btn { background: rgba(244, 67, 54, 0.8) !important; }
+        .delete-btn:hover { background: rgba(244, 67, 54, 1) !important; }
+        .save-btn { background: rgba(76, 175, 80, 0.8) !important; }
+        .save-btn:hover { background: rgba(76, 175, 80, 1) !important; }
+        .cancel-btn { background: rgba(158, 158, 158, 0.8) !important; }
+        .cancel-btn:hover { background: rgba(158, 158, 158, 1) !important; }
         .no-guests {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
@@ -317,43 +369,92 @@
             font-size: 16px;
             margin: 0;
         }
+        /* Contadores */
+		.counters {
+		    padding: 20px 25px;
+		    background: rgba(255,255,255,0.03);
+		    border-top: 1px solid rgba(255,255,255,0.08);
+		    
+		    display: flex; /* coloca os <p> lado a lado */
+		    gap: 30px; /* espaço entre cada item */
+		    flex-wrap: wrap; /* quebra linha se não couber */
+		    align-items: center; /* centraliza verticalmente */
+		}
+
+		.counters p {
+		    margin: 0; /* remove espaçamento vertical extra */
+		    font-size: 16px;
+		    display: flex;
+		    align-items: center;
+		    gap: 5px; /* espaço entre o texto e o número */
+		}
+
+		.counters strong {
+		    color: #64B5F6;
+		    font-weight: 500;
+		}
 
         /* Overlay de Carregamento */
         .loading-overlay {
-            position: fixed; /* Posição fixa para cobrir a tela inteira */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7); /* Preto semi-transparente */
-            display: none; /* Oculto por padrão */
+            background: rgba(0,0,0,0.7);
+            display: none;
             justify-content: center;
             align-items: center;
-            z-index: 9999; /* Garante que fique acima de outros conteúdos */
+            z-index: 9999;
         }
-        /* Animação do Spinner de Carregamento */
+        
         .loading-spinner {
             border: 4px solid rgba(255,255,255,0.3);
-            border-top: 4px solid #2196F3; /* Borda superior azul para efeito de spinner */
+            border-top: 4px solid #2196F3;
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            animation: spin 1s linear infinite; /* Animação de giro */
+            animation: spin 1s linear infinite;
         }
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Modos de exibição para itens de convidado */
-        .edit-mode { display: none; } /* Oculto quando não está editando */
-        .view-mode { display: inline; } /* Visível quando não está editando */
-
-        /* Ajustes Responsivos */
+        /* Modos de exibição */
+        .edit-mode { display: none; }
+        .view-mode { display: block; }
+        /* Toast customizado */
+        .toast {
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        /* Responsividade */
         @media (max-width: 992px) {
             .event-item {
-                flex-basis: calc(50% - 15px); /* Dois itens por linha em telas médias */
+                flex-basis: calc(50% - 15px);
                 max-width: calc(50% - 15px);
+            }
+            .guest-info {
+                gap: 20px;
+            }
+            .guest-field {
+                min-width: 100px;
+            }
+        }
+        @media (max-width: 768px) {
+            .guest-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .guest-info {
+                width: 100%;
+                gap: 15px;
+            }
+            .guest-actions {
+                width: 100%;
+                justify-content: center;
             }
         }
         @media (max-width: 600px) {
@@ -368,12 +469,8 @@
             .card-content {
                 padding: 20px !important;
             }
-            .nav-section {
-                padding-top: 5px;
-                margin-left: -10px; /* Ajustar para telas menores */
-            }
             .event-item {
-                flex-basis: 100%; /* Um item por linha em telas pequenas */
+                flex-basis: 100%;
                 max-width: 100%;
                 padding: 12px 15px;
             }
@@ -386,30 +483,32 @@
             .event-item strong {
                 font-size: 13px;
             }
-            .collection-item {
-                padding: 15px 20px !important;
+            .guest-item {
+                padding: 15px 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Hidden div para passar dados do servidor para JavaScript -->
+    <div id="eventData" style="display: none;" 
+         th:data-codigo="${evento.codigo}"
+         th:data-nome="${evento.nome}">
+    </div>
+
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
     </div>
-
     <div class="container">
         <div class="section nav-section">
             <a href="/eventos" class="waves-effect waves-light btn nav-btn">
                 <i class="material-icons left">arrow_back</i>Voltar para Lista
             </a>
         </div>
-
         <div class="row">
             <div class="col s12 m10 offset-m1">
                 <h1 class="center-align">Detalhes do <span th:text="${evento.nome}"></span></h1>
-
                 <th:block th:insert="~{mensagemValidacao}"></th:block>
-
                 <div class="section">
                     <div class="card main-card">
                         <div class="card-content">
@@ -436,19 +535,16 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Seção da Descrição Editável -->
                 <div class="section">
                     <div class="card description-card">
                         <h5><i class="material-icons">description</i>Descrição do Evento</h5>
                         
-                        <!-- Modo de Visualização da Descrição -->
                         <div class="description-content description-editable view-mode" id="descriptionView" onclick="editDescription()">
-                            <p th:if="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}" th:text="${evento.descricao}"></p>
-                            <p th:unless="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}" class="no-description">Clique aqui para adicionar uma descrição ao evento</p>
+                            <p th:if="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}" th:text="${evento.descricao}" id="descriptionText"></p>
+                            <p th:unless="${evento.descricao != null and not #strings.isEmpty(evento.descricao)}" class="no-description" id="descriptionText">Clique aqui para adicionar uma descrição ao evento</p>
                         </div>
                         
-                        <!-- Modo de Edição da Descrição -->
                         <div class="edit-mode" id="descriptionEdit" style="display: none;">
                             <textarea class="description-edit-area" id="descriptionTextarea" placeholder="Digite a descrição do evento..."></textarea>
                             <div class="description-actions">
@@ -466,7 +562,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="section">
                     <div class="card section-card">
                         <div class="card-content">
@@ -493,49 +588,83 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="section">
                     <div class="card section-card">
                         <h5>Lista de Convidados</h5>
-                        <div class="collection" th:if="${not #lists.isEmpty(convidados)}">
-                            <div class="collection-item" th:each="convidado : ${convidados}" th:data-rg="${convidado.rg}">
-                                <div class="row" style="margin-bottom: 0;">
-									<div class="col s12 m3">
-	                                    <strong>Nome:</strong>
-	                                    <span class="view-mode" th:text="${convidado.nomeConvidado}"></span>
-	                                    <input type="text" class="edit-input edit-mode" th:value="${convidado.nomeConvidado}" name="nomeConvidado">
-	                                </div>
-	                                <div class="col s12 m4">
-	                                    <strong>Número:</strong>
-	                                    <span class="view-mode" th:text="${convidado.rg}"></span>
-	                                    <input type="text" class="edit-input edit-mode" th:value="${convidado.rg}" name="rg">
-	                                </div>
-                                    <div class="col s12 m5 center-align"> <div class="view-mode">
-                                            <a class="btn action-btn edit-btn waves-effect waves-light" onclick="editGuest(this)">
-                                                <i class="material-icons">edit</i>
-                                            </a>
-                                            <a th:href="@{'/deletarConvidado/' + ${convidado.rg}}"
-                                               class="btn action-btn delete-btn waves-effect waves-light" onclick="return confirm('Tem certeza que deseja excluir este convidado?');">
-                                                <i class="material-icons">delete</i>
-                                            </a>
-                                        </div>
-                                        <div class="edit-mode">
-                                            <a class="btn action-btn save-btn waves-effect waves-light" th:onclick="'saveGuest(this, ' + ${evento.codigo} + ')'">
-                                                <i class="material-icons">save</i>
-                                            </a>
-                                            <a class="btn action-btn cancel-btn waves-effect waves-light" onclick="cancelEdit(this)">
-                                                <i class="material-icons">cancel</i>
-                                            </a>
-                                        </div>
+                        
+                        <div class="guests-list" th:if="${not #lists.isEmpty(convidados)}">
+                            <div class="guest-item" th:each="convidado : ${convidados}" th:data-rg="${convidado.rg}">
+                                <div class="guest-info">
+                                    <div class="guest-field">
+                                        <strong>Nome:</strong>
+                                        <span class="view-mode guest-name" th:text="${convidado.nomeConvidado}"></span>
+                                        <input type="text" class="edit-input edit-mode" th:value="${convidado.nomeConvidado}" name="nomeConvidado" style="display: none;">
+                                    </div>
+                                    <div class="guest-field">
+                                        <strong>Número:</strong>
+                                        <span class="view-mode guest-rg" th:text="${convidado.rg}"></span>
+                                        <input type="text" class="edit-input edit-mode" th:value="${convidado.rg}" name="rg" style="display: none;">
+                                    </div>
+                                    <div class="guest-field">
+                                        <strong>Status:</strong>
+                                        <span th:class="'status-badge ' + ${convidado.statusCor}" th:text="${convidado.statusTexto}"></span>
+                                    </div>
+                                </div>
+                                <div class="guest-actions">
+                                    <div class="view-mode">
+                                        <!-- Botões de Status -->
+                                        <button class="btn status-btn status-confirmado waves-effect waves-light" 
+                                               th:data-rg="${convidado.rg}"
+                                               onclick="alterarStatus(this.getAttribute('data-rg'), 1)" 
+                                               title="Marcar como Confirmado">
+                                            <i class="material-icons">check</i>
+                                        </button>
+                                        <button class="btn status-btn status-ausente waves-effect waves-light" 
+                                               th:data-rg="${convidado.rg}"
+                                               onclick="alterarStatus(this.getAttribute('data-rg'), 2)" 
+                                               title="Marcar como Ausente">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                        <button class="btn status-btn status-pendente waves-effect waves-light" 
+                                               th:data-rg="${convidado.rg}"
+                                               onclick="alterarStatus(this.getAttribute('data-rg'), 0)" 
+                                               title="Marcar como Pendente">
+                                            <i class="material-icons">schedule</i>
+                                        </button>
+                                        
+                                        <!-- Botões de Ação -->
+                                        <button class="btn action-btn edit-btn waves-effect waves-light" onclick="editGuest(this)" title="Editar Convidado">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                        <a th:href="@{'/deletarConvidado/' + ${convidado.rg}}"
+                                           class="btn action-btn delete-btn waves-effect waves-light" 
+                                           onclick="return confirm('Tem certeza que deseja excluir este convidado?')"
+                                           title="Excluir Convidado">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    </div>
+                                    <div class="edit-mode" style="display: none;">
+                                        <button class="btn action-btn save-btn waves-effect waves-light" 
+                                                onclick="saveGuest(this)">
+                                            <i class="material-icons">save</i>
+                                        </button>
+                                        <button class="btn action-btn cancel-btn waves-effect waves-light" onclick="cancelEdit(this)">
+                                            <i class="material-icons">cancel</i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="no-guests" th:unless="${not #lists.isEmpty(convidados)}">
                             <p>Nenhum convidado cadastrado ainda.</p>
                         </div>
-                        <div class="col s12 m4" style="padding: 20px 25px;">
+                        
+                        <div class="counters" th:if="${not #lists.isEmpty(convidados)}">
                             <p><strong>Total de Convidados:</strong> <span th:text="${totalConvidados}"></span></p>
+                            <p><strong>Confirmados:</strong> <span th:text="${totalConfirmados}"></span></p>
+                            <p><strong>Ausentes:</strong> <span th:text="${totalAusentes}"></span></p>
+                            <p><strong>Pendentes:</strong> <span th:text="${totalPendentes}"></span></p>
                         </div>
                     </div>
                 </div>
@@ -546,81 +675,151 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        // Inicializa os campos de texto do Materialize (rótulos flutuantes)
-        document.addEventListener('DOMContentLoaded', () => M.updateTextFields());
+        // Variáveis globais
+        let originalDescription = '';
+        const eventoCodigo = [[${evento.codigo}]];
 
-        // Obtém o elemento do overlay de carregamento
+        document.addEventListener('DOMContentLoaded', () => {
+            M.updateTextFields();
+            console.log('Página carregada e scripts inicializados');
+        });
+
         const loading = document.getElementById('loadingOverlay');
-
-        /**
-         * @function showLoading
-         * @description Exibe o overlay de carregamento.
-         */
         const showLoading = () => loading.style.display = 'flex';
-
-        /**
-         * @function hideLoading
-         * @description Oculta o overlay de carregamento.
-         */
         const hideLoading = () => loading.style.display = 'none';
 
-        // Variáveis para controle da descrição
-        let originalDescription = '';
-        const eventoCodigo = [[${evento.codigo}]]; // Obtém o código do evento via Thymeleaf
+        // Função para mostrar toast
+        function showToast(message, color = 'green') {
+            M.toast({
+                html: message, 
+                classes: `${color} darken-2 toast`,
+                displayLength: 3000
+            });
+        }
 
-        /**
-         * @function editDescription
-         * @description Ativa o modo de edição da descrição do evento
-         */
+        function alterarStatus(rg, novoStatus) {
+            console.log('Alterando status:', rg, novoStatus);
+            showLoading();
+            
+            const data = {
+                rg: rg,
+                status: novoStatus.toString()
+            };
+
+            fetch('/alterarStatusConvidado', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(result => {
+                hideLoading();
+                const cleanResult = result.trim();
+                
+                if (cleanResult === 'success') {
+                    showToast('Status alterado com sucesso!');
+                    
+                    const item = document.querySelector(`[data-rg="${rg}"]`);
+                    const statusBadge = item.querySelector('.status-badge');
+                    
+                    statusBadge.classList.remove('green', 'red', 'orange');
+                    
+                    switch(parseInt(novoStatus)) {
+                        case 1:
+                            statusBadge.textContent = 'Confirmado';
+                            statusBadge.classList.add('green');
+                            break;
+                        case 2:
+                            statusBadge.textContent = 'Ausente';
+                            statusBadge.classList.add('red');
+                            break;
+                        case 0:
+                        default:
+                            statusBadge.textContent = 'Pendente';
+                            statusBadge.classList.add('orange');
+                            break;
+                    }
+                    
+                    // Atualizar contadores (se existem na página)
+                    updateCountersFromDOM();
+                } else if (cleanResult === 'not_logged_in') {
+                    showToast('Você precisa estar logado!', 'red');
+                    setTimeout(() => window.location.href = '/login', 1500);
+                } else if (cleanResult === 'no_permission') {
+                    showToast('Você não tem permissão para alterar este convidado!', 'red');
+                } else if (cleanResult === 'not_found') {
+                    showToast('Convidado não encontrado!', 'red');
+                } else {
+                    showToast('Erro ao alterar status. Tente novamente.', 'red');
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                console.error('Erro ao alterar status:', error);
+                showToast('Erro de comunicação. Tente novamente.', 'red');
+            });
+        }
+
+        function updateCountersFromDOM() {
+            const badges = document.querySelectorAll('.status-badge');
+            let confirmados = 0, ausentes = 0, pendentes = 0;
+            
+            badges.forEach(badge => {
+                if (badge.classList.contains('green')) confirmados++;
+                else if (badge.classList.contains('red')) ausentes++;
+                else if (badge.classList.contains('orange')) pendentes++;
+            });
+            
+            const totalElement = document.querySelector('.counters p:nth-child(1) span');
+            const confirmadosElement = document.querySelector('.counters p:nth-child(2) span');
+            const ausentesElement = document.querySelector('.counters p:nth-child(3) span');
+            const pendentesElement = document.querySelector('.counters p:nth-child(4) span');
+            
+            if (totalElement) totalElement.textContent = badges.length;
+            if (confirmadosElement) confirmadosElement.textContent = confirmados;
+            if (ausentesElement) ausentesElement.textContent = ausentes;
+            if (pendentesElement) pendentesElement.textContent = pendentes;
+        }
+
         function editDescription() {
+            console.log('Editando descrição');
             const viewMode = document.getElementById('descriptionView');
             const editMode = document.getElementById('descriptionEdit');
             const textarea = document.getElementById('descriptionTextarea');
             const hints = document.querySelectorAll('.description-hint');
 
-            // Armazena o conteúdo original
-            const descriptionText = viewMode.querySelector('p');
+            const descriptionText = document.getElementById('descriptionText');
             if (descriptionText && !descriptionText.classList.contains('no-description')) {
                 originalDescription = descriptionText.textContent.trim();
             } else {
                 originalDescription = '';
             }
 
-            // Preenche o textarea com o conteúdo atual
             textarea.value = originalDescription;
 
-            // Alterna entre os modos
             viewMode.style.display = 'none';
             editMode.style.display = 'block';
             hints.forEach(hint => hint.style.display = 'none');
 
-            // Foca no textarea //teste
             textarea.focus();
         }
 
-        /**
-         * @function cancelDescriptionEdit
-         * @description Cancela a edição da descrição e volta ao modo de visualização
-         */
         function cancelDescriptionEdit() {
             const viewMode = document.getElementById('descriptionView');
             const editMode = document.getElementById('descriptionEdit');
             const hints = document.querySelectorAll('.description-hint');
 
-            // Volta ao modo de visualização
             viewMode.style.display = 'block';
             editMode.style.display = 'none';
             hints.forEach(hint => hint.style.display = 'block');
         }
 
-        /**
-         * @function saveDescription
-         * @description Salva a descrição editada no servidor
-         */
         function saveDescription() {
+            console.log('Salvando descrição');
             const textarea = document.getElementById('descriptionTextarea');
             const newDescription = textarea.value.trim();
-
             showLoading();
 
             const data = {
@@ -639,252 +838,202 @@
             .then(result => {
                 hideLoading();
                 const cleanResult = result.trim();
-
+                
                 if (cleanResult === 'success') {
-                    M.toast({html: 'Descrição atualizada com sucesso!', classes: 'green darken-2'});
+                    showToast('Descrição atualizada com sucesso!');
                     
-                    // Atualiza o conteúdo da visualização
-                    const viewMode = document.getElementById('descriptionView');
-                    const descriptionP = viewMode.querySelector('p');
+                    const descriptionText = document.getElementById('descriptionText');
                     
                     if (newDescription) {
-                        if (descriptionP) {
-                            descriptionP.textContent = newDescription;
-                            descriptionP.classList.remove('no-description');
-                        } else {
-                            viewMode.innerHTML = `<p>${newDescription}</p>`;
-                        }
+                        descriptionText.textContent = newDescription;
+                        descriptionText.classList.remove('no-description');
                     } else {
-                        if (descriptionP) {
-                            descriptionP.textContent = 'Clique aqui para adicionar uma descrição ao evento';
-                            descriptionP.classList.add('no-description');
-                        } else {
-                            viewMode.innerHTML = '<p class="no-description">Clique aqui para adicionar uma descrição ao evento</p>';
-                        }
+                        descriptionText.textContent = 'Clique aqui para adicionar uma descrição ao evento';
+                        descriptionText.classList.add('no-description');
                     }
 
-                    // Volta ao modo de visualização
                     cancelDescriptionEdit();
+                } else if (cleanResult === 'not_logged_in') {
+                    showToast('Você precisa estar logado!', 'red');
+                    setTimeout(() => window.location.href = '/login', 1500);
                 } else {
-                    M.toast({html: 'Erro ao salvar descrição. Tente novamente.', classes: 'red'});
+                    showToast('Erro ao salvar descrição. Tente novamente.', 'red');
                 }
             })
             .catch(error => {
                 hideLoading();
                 console.error('Erro ao salvar descrição:', error);
-                M.toast({html: 'Erro de comunicação. Tente novamente.', classes: 'red'});
+                showToast('Erro de comunicação. Tente novamente.', 'red');
             });
         }
 
-        /**
-         * @function editGuest
-         * @param {HTMLElement} btn - O botão de edição clicado.
-         * @description Alterna o modo de exibição de um item de convidado do modo de visualização para o modo de edição.
-         * Ele oculta elementos do modo de visualização, mostra elementos do modo de edição e adiciona
-         * uma classe 'editing' para estilização visual.
-         */
         function editGuest(btn) {
-            const item = btn.closest('.collection-item');
-            // Oculta todos os elementos com a classe 'view-mode' dentro do item
+            console.log('Editando convidado');
+            const item = btn.closest('.guest-item');
+            
+            // Esconder elementos de visualização e mostrar elementos de edição
             item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');
-            // Mostra todos os elementos com a classe 'edit-mode' dentro do item
-            item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'inline');
-            // Adiciona a classe 'editing' ao item para estilização específica
+            item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'inline-block');
             item.classList.add('editing');
-            // Foca no campo de entrada do nome para edição imediata
-            item.querySelector('input[name="nomeConvidado"]').focus();
+            
+            const nameInput = item.querySelector('input[name="nomeConvidado"]');
+            if (nameInput) {
+                nameInput.focus();
+                nameInput.select();
+            }
         }
 
-        /**
-         * @function cancelEdit
-         * @param {HTMLElement} btn - O botão de cancelar clicado.
-         * @description Reverte um item de convidado do modo de edição para o modo de visualização.
-         * Ele oculta elementos do modo de edição, mostra elementos do modo de visualização, remove
-         * a classe 'editing' e restaura os valores originais nos campos de entrada.
-         */
-		 function cancelEdit(btn) {
-		     const item = btn.closest('.collection-item');
-		     // Mostra todos os elementos com a classe 'view-mode' dentro do item
-		     item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'inline');
-		     // Oculta todos os elementos com a classe 'edit-mode' dentro do item
-		     item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
-		     // Remove a classe 'editing' do item
-		     item.classList.remove('editing');
+        function cancelEdit(btn) {
+            const item = btn.closest('.guest-item');
+            
+            // Mostrar elementos de visualização e esconder elementos de edição
+            item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'block');
+            item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+            item.classList.remove('editing');
 
-		     // Restaura os valores originais nos campos de entrada
-		     const nameInput = item.querySelector('input[name="nomeConvidado"]');
-		     const rgInput = item.querySelector('input[name="rg"]');
-		     
-		     // Busca os spans corretos usando uma abordagem mais direta
-		     const nameSpan = item.querySelector('.col:nth-child(1) .view-mode');
-		     const rgSpan = item.querySelector('.col:nth-child(2) .view-mode');
+            // Restaurar valores originais
+            const nameInput = item.querySelector('input[name="nomeConvidado"]');
+            const rgInput = item.querySelector('input[name="rg"]');
+            
+            const nameSpan = item.querySelector('.guest-field:nth-child(1) .view-mode');
+            const rgSpan = item.querySelector('.guest-field:nth-child(2) .view-mode');
 
-		     if (nameInput && nameSpan) {
-		         nameInput.value = nameSpan.textContent.trim();
-		     }
-		     if (rgInput && rgSpan) {
-		         rgInput.value = rgSpan.textContent.trim();
-		     }
-		     
-		     // Re-activate Materialize labels for correct display after value reset
-		     M.updateTextFields();
-		 }
+            if (nameInput && nameSpan) {
+                nameInput.value = nameSpan.textContent.trim();
+            }
+            if (rgInput && rgSpan) {
+                rgInput.value = rgSpan.textContent.trim();
+            }
+            
+            M.updateTextFields();
+        }
 
-        /**
-         * @function saveGuest
-         * @param {HTMLElement} btn - O botão de salvar clicado.
-         * @param {number} eventoCodigo - O código do evento ao qual o convidado pertence.
-         * @description Salva as informações editadas do convidado no servidor via uma requisição AJAX POST.
-         * Ele realiza validação no lado do cliente, mostra um indicador de carregamento, envia os dados
-         * e lida com a resposta do servidor (sucesso, RG existente, não encontrado ou erro).
-         */
         function saveGuest(btn, eventoCodigo) {
-            const item = btn.closest('.collection-item');
-            const originalRg = item.dataset.rg; // Obtém o RG original do atributo data-rg
+            console.log('Salvando convidado');
+            const item = btn.closest('.guest-item');
+            const originalRg = item.dataset.rg;
             const nameInput = item.querySelector('input[name="nomeConvidado"]');
             const rgInput = item.querySelector('input[name="rg"]');
             const newName = nameInput.value.trim();
             const newRg = rgInput.value.trim();
 
-            // Validação no lado do cliente
             if (!newName) {
-                M.toast({html: 'O nome do convidado não pode estar vazio!', classes: 'red'});
+                showToast('O nome do convidado não pode estar vazio!', 'red');
                 nameInput.focus();
                 return;
             }
 
             if (!newRg) {
-                M.toast({html: 'O número (RG) não pode estar vazio!', classes: 'red'});
+                showToast('O número (RG) não pode estar vazio!', 'red');
                 rgInput.focus();
                 return;
             }
 
-            showLoading(); // Mostra o indicador de carregamento
+            showLoading();
 
-			const data = {
-			    rg: originalRg,        // RG original (nome do parâmetro que seu controller espera)
-			    novoRg: newRg,         // Novo RG (nome do parâmetro que seu controller espera)
-			    nomeConvidado: newName // Nome do convidado
-			};
+            const data = {
+                rg: originalRg,
+                novoRg: newRg,
+                nomeConvidado: newName
+            };
 
             fetch('/editarConvidado', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data) // Envia dados como JSON
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             })
-            .then(response => response.text()) // Obtém a resposta como texto
+            .then(response => response.text())
             .then(result => {
-                hideLoading(); // Oculta o indicador de carregamento
-                const cleanResult = result.trim(); // Remove espaços em branco da resposta
-
+                hideLoading();
+                const cleanResult = result.trim();
+                
                 if (cleanResult === 'success') {
-                    M.toast({html: 'Convidado atualizado com sucesso!', classes: 'green darken-2'});
-                    // Update the view-mode spans with new values
-					const nameSpan = item.querySelector('.col:nth-child(1) .view-mode');
-					const rgSpan = item.querySelector('.col:nth-child(2) .view-mode');
-					if (nameSpan) nameSpan.textContent = newName;
-					if (rgSpan) rgSpan.textContent = newRg;
-                    item.dataset.rg = newRg; // Update the data-rg attribute for future edits
+                    showToast('Convidado atualizado com sucesso!');
+                    
+                    // Atualizar interface
+                    const nameSpan = item.querySelector('.guest-field:nth-child(1) .view-mode');
+                    const rgSpan = item.querySelector('.guest-field:nth-child(2) .view-mode');
+                    if (nameSpan) nameSpan.textContent = newName;
+                    if (rgSpan) rgSpan.textContent = newRg;
+                    item.dataset.rg = newRg;
 
-                    // Revert to view mode
-                    item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'inline');
+                    // Voltar ao modo de visualização
+                    item.querySelectorAll('.view-mode').forEach(el => el.style.display = 'block');
                     item.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
                     item.classList.remove('editing');
-                    M.updateTextFields(); // Update Materialize labels
+                    M.updateTextFields();
                 } else if (cleanResult === 'rg_exists') {
-                    M.toast({html: 'Este número (RG) já está sendo usado por outro convidado!', classes: 'red'});
-                    rgInput.focus(); // Foca no campo de RG se for duplicado
+                    showToast('Este número (RG) já está sendo usado por outro convidado!', 'red');
+                    rgInput.focus();
                 } else if (cleanResult === 'not_found') {
-                    M.toast({html: 'Convidado não encontrado!', classes: 'red'});
+                    showToast('Convidado não encontrado!', 'red');
+                } else if (cleanResult === 'not_logged_in') {
+                    showToast('Você precisa estar logado!', 'red');
+                    setTimeout(() => window.location.href = '/login', 1500);
+                } else if (cleanResult === 'no_permission') {
+                    showToast('Você não tem permissão para editar este convidado!', 'red');
                 } else {
-                    M.toast({html: 'Erro desconhecido ao salvar. Recarregando página...', classes: 'orange'});
-                    setTimeout(() => window.location.reload(), 1500); // Recarrega após um pequeno atraso
+                    showToast('Erro ao salvar convidado. Tente novamente.', 'red');
                 }
             })
             .catch(error => {
-                hideLoading(); // Oculta o indicador de carregamento em caso de erro
+                hideLoading();
                 console.error('Erro ao salvar convidado:', error);
-                // Informa o usuário e recarrega em caso de erro de rede ou não tratado
-                M.toast({html: 'Erro de comunicação ao salvar dados. Recarregando página...', classes: 'orange'});
+                showToast('Erro de comunicação. Recarregando página...', 'orange');
                 setTimeout(() => window.location.reload(), 2000);
             });
         }
 
-        // Handle delete guest functionality (using a direct click listener on the delete link)
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', function(event) {
-                // The 'onclick="return confirm(...)"' already handles the confirmation.
-                // If confirmed, the browser will navigate to the th:href URL.
-                // We'll let the standard form submission handle the actual deletion and page reload.
-                // If you want full AJAX deletion without page reload, you'd preventDefault
-                // and use fetch here. For now, assuming standard link behavior after confirmation.
-
-                // If you uncomment the preventDefault, you'd need the fetch logic below:
-                // event.preventDefault();
-                // const deleteUrl = this.href;
-                // showLoading();
-                // fetch(deleteUrl, { method: 'GET' }) // Or 'POST' if your backend expects it
-                //     .then(response => {
-                //         if (response.ok) {
-                //             return response.text();
-                //         }
-                //         throw new Error('Erro ao deletar convidado.');
-                //     })
-                //     .then(message => {
-                //         hideLoading();
-                //         M.toast({html: message, classes: 'green darken-2'});
-                //         this.closest('.collection-item').remove(); // Remove the list item from the DOM
-                //         // Logic to update totalConvidados and 'no guests' message
-                //         const totalGuestsElement = document.querySelector('p strong:contains("Total de Convidados:") + span');
-                //         if (totalGuestsElement) {
-                //             let currentTotal = parseInt(totalGuestsElement.textContent);
-                //             totalGuestsElement.textContent = currentTotal > 0 ? currentTotal - 1 : 0;
-                //         }
-                //         if (document.querySelectorAll('.collection-item').length === 0) {
-                //             document.querySelector('.collection').style.display = 'none';
-                //             document.querySelector('.no-guests').style.display = 'block';
-                //         }
-                //     })
-                //     .catch(error => {
-                //         hideLoading();
-                //         console.error('Erro:', error);
-                //         M.toast({html: error.message, classes: 'red darken-2'});
-                //     });
-            });
-        });
-
-        // Atalhos de teclado para edição
+        // Atalhos de teclado
         document.addEventListener('keydown', function(e) {
-            const activeElement = document.activeElement; // Obtém o elemento atualmente focado
+            const activeElement = document.activeElement;
             
-            // Verifica se o elemento focado é um dos campos de entrada de edição
+            // Atalhos para edição de convidados
             if (activeElement && activeElement.classList.contains('edit-input')) {
-                const item = activeElement.closest('.collection-item'); // Obtém o item pai do convidado
+                const item = activeElement.closest('.guest-item');
 
-                if (e.key === 'Enter') {
-                    // Se a tecla Enter for pressionada, tenta salvar o convidado
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
                     const saveBtn = item.querySelector('.save-btn');
                     if (saveBtn) saveGuest(saveBtn, eventoCodigo);
                 } else if (e.key === 'Escape') {
-                    // Se a tecla Escape for pressionada, cancela a edição
+                    e.preventDefault();
                     const cancelBtn = item.querySelector('.cancel-btn');
                     if (cancelBtn) cancelEdit(cancelBtn);
                 }
             }
             
-            // Atalhos de teclado para edição da descrição
+            // Atalhos para edição de descrição
             if (activeElement && activeElement.id === 'descriptionTextarea') {
                 if (e.key === 'Enter' && e.ctrlKey) {
-                    // Ctrl + Enter para salvar a descrição
                     e.preventDefault();
                     saveDescription();
                 } else if (e.key === 'Escape') {
-                    // Escape para cancelar edição da descrição
                     e.preventDefault();
                     cancelDescriptionEdit();
                 }
             }
+
+            // Atalho para adicionar convidado (Alt + A)
+            if (e.altKey && e.key === 'a') {
+                e.preventDefault();
+                document.getElementById('nomeConvidado').focus();
+            }
         });
+
+        // Tornar funções globalmente acessíveis
+        window.alterarStatus = alterarStatus;
+        window.editDescription = editDescription;
+        window.cancelDescriptionEdit = cancelDescriptionEdit;
+        window.saveDescription = saveDescription;
+        window.editGuest = editGuest;
+        window.cancelEdit = cancelEdit;
+        window.saveGuest = saveGuest;
+
+        // Log para indicar que o script foi carregado
+        console.log('Sistema de eventos carregado com sucesso!');
     </script>
 </body>
 </html>

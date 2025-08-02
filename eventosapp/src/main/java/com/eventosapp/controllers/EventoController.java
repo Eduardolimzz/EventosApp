@@ -115,8 +115,57 @@ public class EventoController {
 
         mv.addObject("convidados", convidados); 
         mv.addObject("totalConvidados", convidados.size());
+        
+        long confirmados = convidados.stream().filter(c -> c.getStatusConfirmacao() == 1).count();
+        long ausentes = convidados.stream().filter(c -> c.getStatusConfirmacao() == 2).count();
+        long pendentes = convidados.stream().filter(c -> c.getStatusConfirmacao() == 0).count();
+        
+        mv.addObject("totalConfirmados", confirmados);
+        mv.addObject("totalAusentes", ausentes);
+        mv.addObject("totalPendentes", pendentes);
 
         return mv;
+    }
+    
+    @RequestMapping(value = "/alterarStatusConvidado", method = RequestMethod.POST)
+    @ResponseBody
+    public String alterarStatusConvidado(@RequestBody Map<String, String> dados, 
+                                       HttpSession session) {
+        try {
+            Usuario usuarioLogado = verificarUsuarioLogado(session);
+            if (usuarioLogado == null) {
+                return "not_logged_in";
+            }
+            
+            String rg = dados.get("rg");
+            Integer novoStatus = Integer.parseInt(dados.get("status"));
+            
+            if (novoStatus < 0 || novoStatus > 2) {
+                return "invalid_status";
+            }
+            
+            Optional<Convidado> convidadoOptional = cr.findById(rg);
+            
+            if (convidadoOptional.isPresent()) {
+                Convidado convidado = convidadoOptional.get();
+                
+                if (!convidado.getEvento().getUsuario().getId().equals(usuarioLogado.getId())) {
+                    return "no_permission";
+                }
+                
+                convidado.setStatusConfirmacao(novoStatus);
+                cr.save(convidado);
+                
+                return "success";
+            } else {
+                return "not_found";
+            }
+        } catch (NumberFormatException e) {
+            return "error: Invalid status format";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error: " + e.getMessage();
+        }
     }
     
     @RequestMapping(value = "/deletarEvento/{codigo}", method = RequestMethod.GET)
