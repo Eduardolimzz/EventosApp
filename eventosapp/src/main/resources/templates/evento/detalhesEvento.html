@@ -239,6 +239,49 @@
             flex: 1;
             flex-wrap: wrap;
         }
+		.link-container {
+		    display: flex;
+		    align-items: flex-end;
+		    gap: 10px;
+		    margin-bottom: 20px;
+		}
+
+		.link-container .input-field {
+		    flex: 1;
+		    margin: 0;
+		}
+
+		.link-container input[type=text] {
+		    background: rgba(255,255,255,0.1);
+		    border-radius: 8px;
+		    padding: 10px;
+		    border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+		}
+
+		.share-actions {
+		    display: flex;
+		    flex-wrap: wrap;
+		    gap: 10px;
+		    justify-content: center;
+		    margin-top: 15px;
+		}
+
+		.share-info p {
+		    color: #e0e0e0;
+		    text-align: center;
+		    margin-bottom: 20px;
+		}
+
+		@media (max-width: 600px) {
+		    .link-container {
+		        flex-direction: column;
+		        align-items: stretch;
+		    }
+		    
+		    .link-container button {
+		        margin: 10px 0 0 0 !important;
+		    }
+		}
 		.guest-field {
 		    display: flex;
 		    flex-direction: row; /* coloca lado a lado */
@@ -285,7 +328,7 @@
             padding: 4px 12px;
             font-size: 12px;
             font-weight: 600;
-            text-transform: uppercase;
+            text-transform: lowercase;
             margin-right: 15px;
         }
         .status-badge.green { 
@@ -507,7 +550,7 @@
         </div>
         <div class="row">
             <div class="col s12 m10 offset-m1">
-                <h1 class="center-align">Detalhes do <span th:text="${evento.nome}"></span></h1>
+                <h1 class="center-align">Detalhes do(a) <span th:text="${evento.nome}"></span></h1>
                 <th:block th:insert="~{mensagemValidacao}"></th:block>
                 <div class="section">
                     <div class="card main-card">
@@ -556,12 +599,35 @@
                                 </button>
                             </div>
                         </div>
-                        
+						
                         <div class="description-hint view-mode">
                             Clique na descrição para editá-la
                         </div>
                     </div>
                 </div>
+				
+				<div class="section">
+										    <div class="card section-card">
+										        <h5><i class="material-icons">share</i>Compartilhar Evento</h5>
+										        <div class="card-content">
+										            <div class="share-info">
+										                <p>Compartilhe este link para que as pessoas possam confirmar presença:</p>
+										                <div class="link-container">
+										                    <div class="input-field">
+										                        <input id="shareLink" type="text" readonly 
+										                               th:value="${'https://javaspringboot-production-a11a.up.railway.app/confirmar/' + evento.codigo}">
+										                        <label for="shareLink" class="active">Link do Evento</label>
+										                    </div>
+															<button class="btn waves-effect waves-light" onclick="copyToClipboard()" 
+															    style="background: linear-gradient(45deg, #1976D2, #1976D2) !important; margin-left: 15px; position: relative; top: -20px;">
+															    <i class="material-icons">content_copy</i>
+															</button>
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+				
                 <div class="section">
                     <div class="card section-card">
                         <div class="card-content">
@@ -574,7 +640,7 @@
                                     </div>
                                     <div class="input-field col s12 m6">
                                         <input id="rg" type="text" name="rg" class="validate" required>
-                                        <label for="rg">Número</label>
+                                        <label for="rg">E-mail</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -588,6 +654,7 @@
                         </div>
                     </div>
                 </div>
+				
                 <div class="section">
                     <div class="card section-card">
                         <h5>Lista de Convidados</h5>
@@ -601,7 +668,7 @@
                                         <input type="text" class="edit-input edit-mode" th:value="${convidado.nomeConvidado}" name="nomeConvidado" style="display: none;">
                                     </div>
                                     <div class="guest-field">
-                                        <strong>Número:</strong>
+                                        <strong>E-mail:</strong>
                                         <span class="view-mode guest-rg" th:text="${convidado.rg}"></span>
                                         <input type="text" class="edit-input edit-mode" th:value="${convidado.rg}" name="rg" style="display: none;">
                                     </div>
@@ -761,6 +828,34 @@
                 showToast('Erro de comunicação. Tente novamente.', 'red');
             });
         }
+		function copyToClipboard() {
+		    const linkInput = document.getElementById('shareLink');
+		    linkInput.select();
+		    linkInput.setSelectionRange(0, 99999);
+		    
+		    try {
+		        document.execCommand('copy');
+		        showToast('Link copiado para a área de transferência!', 'green');
+		    } catch (err) {
+		        // Fallback para navegadores mais novos
+		        navigator.clipboard.writeText(linkInput.value).then(() => {
+		            showToast('Link copiado para a área de transferência!', 'green');
+		        }).catch(() => {
+		            showToast('Erro ao copiar link. Selecione e copie manualmente.', 'orange');
+		        });
+		    }
+		}
+
+		function shareByEmail() {
+		    const eventName = document.querySelector('h1 span').textContent;
+		    const shareLink = document.getElementById('shareLink').value;
+		    
+		    const subject = `Convite para o evento: ${eventName}`;
+		    const body = `Olá!\n\nVocê está convidado(a) para o evento "${eventName}".\n\nPara confirmar sua presença, acesse o link:\n${shareLink}\n\nAguardamos você!`;
+		    
+		    const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+		    window.location.href = mailto;
+		}
 
         function updateCountersFromDOM() {
             const badges = document.querySelectorAll('.status-badge');
@@ -924,7 +1019,7 @@
             }
 
             if (!newRg) {
-                showToast('O número (RG) não pode estar vazio!', 'red');
+                showToast('O E-mail não pode estar vazio!', 'red');
                 rgInput.focus();
                 return;
             }
@@ -965,7 +1060,7 @@
                     item.classList.remove('editing');
                     M.updateTextFields();
                 } else if (cleanResult === 'rg_exists') {
-                    showToast('Este número (RG) já está sendo usado por outro convidado!', 'red');
+                    showToast('Este E-mail já está sendo usado por outro convidado!', 'red');
                     rgInput.focus();
                 } else if (cleanResult === 'not_found') {
                     showToast('Convidado não encontrado!', 'red');
