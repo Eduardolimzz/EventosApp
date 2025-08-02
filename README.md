@@ -33,7 +33,7 @@ O **EventosApp** é um sistema web completo desenvolvido com **Java 17** e **Spr
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend
 - **Java 17** - Linguagem principal
