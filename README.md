@@ -60,7 +60,7 @@ O **EventosApp** é um sistema web completo desenvolvido com **Java 17** e **Spr
 
 ---
 
-## 🚀 Como Executar o Projeto
+## Como Executar o Projeto
 
 ### Pré-requisitos
 
@@ -111,7 +111,7 @@ http://localhost:8080
 
 ---
 
-## 🎯 Como Usar
+## Como Usar
 
 ### 1. **Página Inicial**
 - Acesse a página principal com design moderno
@@ -135,7 +135,7 @@ http://localhost:8080
 
 ---
 
-## 🌐 API Endpoints
+## API Endpoints
 
 ### Públicos (Não requer autenticação)
 | Método | Endpoint | Descrição |
@@ -157,7 +157,7 @@ http://localhost:8080
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 eventosapp/
@@ -188,7 +188,7 @@ eventosapp/
 
 ---
 
-## 🔧 Configuração Avançada
+## Configuração Avançada
 
 ### Variáveis de Ambiente (Produção)
 ```bash
@@ -199,7 +199,7 @@ SPRING_PROFILES_ACTIVE=prod
 
 ---
 
-## 🚀 Deploy
+## Deploy
 
 ### Railway (Recomendado)
 1. Conecte seu repositório GitHub ao Railway
@@ -208,7 +208,7 @@ SPRING_PROFILES_ACTIVE=prod
 
 ---
 
-## 🤝 Contribuindo
+## Contribuindo
 
 Contribuições são sempre bem-vindas! Para contribuir:
 
@@ -220,7 +220,7 @@ Contribuições são sempre bem-vindas! Para contribuir:
 
 ---
 
-## 🐛 Reportar Problemas
+## Reportar Problemas
 
 Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_Boot/issues) descrevendo:
 - Passos para reproduzir
@@ -230,7 +230,7 @@ Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_B
 
 ---
 
-## 📊 Roadmap
+## Roadmap
 
 - [ ] Sistema de notificações por email
 - [ ] Dashboard com gráficos avançados
@@ -240,7 +240,7 @@ Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_B
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 <div align="center">
   <img src="https://github.com/Eduardolimzz.png" width="100px" style="border-radius: 50%">
@@ -256,5 +256,5 @@ Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_B
 ---
 
 <div align="center">
-  <p>⭐ Se este projeto te ajudou, considere dar uma estrela!</p>
+  <p>Se este projeto te ajudou, considere dar uma estrela!</p>
 </div>
