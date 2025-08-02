@@ -1,4 +1,4 @@
-# 🎉 EventosApp
+#  EventosApp
 
 <div align="center">
   <img src="https://img.shields.io/badge/Java-17+-orange?style=for-the-badge&logo=java" alt="Java">
@@ -21,7 +21,7 @@
 
 O **EventosApp** é um sistema web completo desenvolvido com **Java 17** e **Spring Boot** que permite o gerenciamento profissional de eventos. A aplicação oferece uma interface moderna e intuitiva para criar eventos, gerenciar convidados e acompanhar confirmações de presença em tempo real.
 
-### ✨ Principais Funcionalidades
+###  Principais Funcionalidades
 
 - 🎪 **Gestão Completa de Eventos** - Criar, editar e excluir eventos
 - 👥 **Gerenciamento de Convidados** - Adicionar e controlar lista de convidados  
@@ -214,11 +214,6 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 2. Configure as variáveis de ambiente
 3. O deploy é automático a cada push
 
-### Outras Plataformas
-- **Heroku**: Suporte completo com Procfile
-- **AWS**: Deploy via Elastic Beanstalk
-- **Google Cloud**: App Engine compatível
-
 ---
 
 ## 🤝 Contribuindo
@@ -248,7 +243,6 @@ Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_B
 - [ ] Sistema de notificações por email
 - [ ] Dashboard com gráficos avançados
 - [ ] API REST completa
-- [ ] App mobile (React Native)
 - [ ] Integração com calendários
 - [ ] Sistema de templates de eventos
 
@@ -270,7 +264,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
   [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/Eduardolimzz)
   [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/eduardolimzz)
   
-  *Desenvolvedor Full Stack apaixonado por criar soluções que fazem a diferença*
+  *Desenvolvedor Full Stack*
 </div>
 
 ---
