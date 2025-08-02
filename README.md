@@ -248,7 +248,7 @@ Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_B
   **Eduardo Lima dos Santos**
   
   [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/Eduardolimzz)
-  [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/eduardolimzz)
+  [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/eduardo-lima-3b1092316/)
   
   *Desenvolvedor Full Stack*
 </div>
