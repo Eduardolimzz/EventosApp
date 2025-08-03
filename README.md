@@ -74,8 +74,8 @@ Certifique-se de ter instalado:
 
 1. **Clone o repositório**
 ```bash
-git clone https://github.com/Eduardolimzz/Java_Spring_Boot.git
-cd Java_Spring_Boot/eventosapp
+git clone https://github.com/Eduardolimzz/EventosApp.git
+cd EventosApp/eventosapp
 ```
 
 2. **Configure o banco de dados**
@@ -222,7 +222,7 @@ Contribuições são sempre bem-vindas! Para contribuir:
 
 ## Reportar Problemas
 
-Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/Java_Spring_Boot/issues) descrevendo:
+Encontrou um bug? [Abra uma issue](https://github.com/Eduardolimzz/EventosApp/issues) descrevendo:
 - Passos para reproduzir
 - Comportamento esperado vs atual
 - Screenshots (se aplicável)
