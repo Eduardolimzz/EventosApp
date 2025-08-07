@@ -3,8 +3,6 @@ import java.io.Serializable;
 import java.util.List;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 @Entity
 public class Evento implements Serializable {
